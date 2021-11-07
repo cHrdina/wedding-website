@@ -43,6 +43,7 @@ export const MobileMenu = () => {
           setIsOpen(false);
         }}
         anchor="right"
+        variant="temporary"
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -55,7 +56,7 @@ export const MobileMenu = () => {
         </DrawerHeader>
         <List>
           {mainMenuRoutes
-            .filter(({ route }) => route !== "/login")
+            .filter((route) => !route.isPublic)
             .map(({ name, route }, key) => (
               <ListItem>
                 <ListItemText>

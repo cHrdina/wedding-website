@@ -6,6 +6,7 @@ import Rsvp from "../pages/Rsvp";
 import Registry from "../pages/Registry";
 import Tips from "../pages/Tips";
 
+
 export const mainMenuRoutes = [
   {
     name: "Home",
@@ -14,8 +15,9 @@ export const mainMenuRoutes = [
   },
   {
     name: "Login",
-    route: "/login",
+    route: "/login/:id",
     component: Login,
+    isPublic: true
   },
   {
     name: "Program",

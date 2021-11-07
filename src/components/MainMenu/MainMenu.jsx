@@ -60,7 +60,7 @@ export const Header = () => {
         ) : (
           <div className={classes.navlinks}>
             {mainMenuRoutes
-              .filter(({ route }) => route !== "/login")
+              .filter((route) => !route.isPublic)
               .map(({ name, route }, key) => (
                 <Link
                   key={key}
