@@ -1,15 +1,14 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
-import { Input, InputLabel } from "@mui/material";
 import { getEntryById } from "../client/client";
-import { useParams } from "react-router";
-import { Button } from "@material-ui/core";
+import { useParams, useHistory } from "react-router";
+import { LoginForm } from "../components/LoginForm/LoginForm";
 
-const Login = (props) => {
+export const Login = ({ setLoggedInUser }) => {
   const [user, setUser] = useState();
-  const [isLoggedIn, setIsLoggedIn] = useState();
   const { id: userId } = useParams();
+  const history = useHistory();
 
   const getUserInfo = async () => {
     const entry = await getEntryById(userId);
@@ -17,12 +16,21 @@ const Login = (props) => {
     setUser(entry.fields);
   };
 
-  const attemptLogin = ({ userPass }) => {
+  const attemptLogin = (password) => {
     console.log("form submit");
-    setIsLoggedIn(userPass === user.password);
+    console.log("password: ", password);
+
+    if (password === user.password) {
+      console.log("password success: ", userId);
+      setLoggedInUser(userId);
+      history.push("/");
+    } else {
+      setLoggedInUser(null);
+    }
   };
 
   useEffect(() => {
+    console.log("useEffecy triggetres");
     getUserInfo();
   }, [userId]);
 
@@ -35,21 +43,15 @@ const Login = (props) => {
         display: "flex",
         flex: 1,
         alignItems: "center",
-        color: "#fff",
-        backgroundColor: "#000",
+        // color: "#fff",
+        // backgroundColor: "#000",
         fontSize: "30px",
       }}
     >
-      {isLoggedIn && <h1 sx={{ color: "inherit" }}>Logged In</h1>}
-      <form onSubmit={attemptLogin}>
-        <InputLabel sx={{ color: "inherit" }}>
-          User is {user.firstName}: Password is {user.password}:
-        </InputLabel>
-        <Input className="password-input" name="userPass" type="password" />
-        <Button type="submit">Login</Button>
-      </form>
+      <LoginForm onSubmit={attemptLogin} />
     </Box>
   );
+  return <div>hello</div>;
 };
 
 export default Login;

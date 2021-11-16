@@ -14,12 +14,6 @@ export const mainMenuRoutes = [
     component: Home,
   },
   {
-    name: "Login",
-    route: "/login/:id",
-    component: Login,
-    isPublic: true
-  },
-  {
     name: "Program",
     route: "/program",
     component: Program,
