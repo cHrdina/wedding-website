@@ -1,25 +1,25 @@
 import "./App.css";
 import React, {useEffect, useState, useContext, createContext} from "react"
-import { BrowserRouter as Router, Switch, Route, Redirect, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, useParams, useHistory } from "react-router-dom";
 
 import { Header } from "./components/MainMenu/MainMenu";
 
 import {Login} from "./pages/Login"
 import { mainMenuRoutes } from "./routes";
 import { Box } from "@mui/system";
-import { LoginWithUser } from "./components/LoginWithUser/LoginWithUser";
-import { getEntryById } from "./client/client";
 
-const PrivateRoute = ({ loggedInUser, component: Component, ...rest }) => {
+import { AuthContext, AuthHandler } from "./handlers/AuthHandler";
 
-  const {userId} = useContext(AuthContext)
+const PrivateRoute = ({ component: Component, ...rest }) => {
+
+  const { user } = useContext(AuthContext)
 
   return (
     <Route
       {...rest}
       render={props => {
-        if (!loggedInUser) {
-          if (userId) return <Redirect to={{ pathname: `/login/${userId}`, state: { from: props.location } }} /> 
+        if (!user) {
+          console.log("no user exists")
           return <Redirect to={{ pathname: `/login`, state: { from: props.location } }} />
         }
     
@@ -44,45 +44,23 @@ const PrivateRoute = ({ loggedInUser, component: Component, ...rest }) => {
   )
 }
 
-export const AuthContext = createContext({
-  userId: undefined,
-  user: undefined
-})
-
-const AuthHandler = ({userId, children}) => {
-  const [user, setUser] = useState();
-
-  const getUserInfo = async () => {
-    const entry = await getEntryById(userId);
-    console.log(entry.fields);
-    setUser(entry.fields);
-  };
-
-  useEffect(() => {
-    if (userId) getUserInfo()
-  }, [userId])
-
-  return (
-    <AuthContext.Provider value={{userId, user}} >{children}</AuthContext.Provider>
-  )
-
-}
 
 function App() {
   
-  const [loggedInUser, setLoggedInUser] = useState();
 
   return (
     <Router>
-      <AuthHandler userId={loggedInUser}>
+      <AuthHandler>
       <Switch>
-          <Route exact path={`/login`} component={LoginWithUser} />
+          <Route exact path={`/login`} >
+            <Login />
+          </Route>
           <Route path={`/login/:id`} >
-            <Login setLoggedInUser={setLoggedInUser} />
+            <Login />
           </Route>
 
           {mainMenuRoutes.map(({route, component}) => (
-            <PrivateRoute exact path={route} component={component} loggedInUser={loggedInUser} />
+            <PrivateRoute exact path={route} component={component} />
           ))}
       </ Switch>
   </AuthHandler>

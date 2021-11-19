@@ -1,40 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 
 import Box from "@mui/material/Box";
-import { getEntryById } from "../client/client";
-import { useParams, useHistory } from "react-router";
+import { useParams } from "react-router";
 import { LoginForm } from "../components/LoginForm/LoginForm";
+import { AuthContext } from "../handlers/AuthHandler";
 
-export const Login = ({ setLoggedInUser }) => {
-  const [user, setUser] = useState();
-  const { id: userId } = useParams();
-  const history = useHistory();
+export const Login = () => {
+  const { id: paramsUserId } = useParams();
+  const { loginUser, loginUserWithId } = useContext(AuthContext);
 
-  const getUserInfo = async () => {
-    const entry = await getEntryById(userId);
-    console.log(entry.fields);
-    setUser(entry.fields);
-  };
-
-  const attemptLogin = (password) => {
-    console.log("form submit");
-    console.log("password: ", password);
-
-    if (password === user.password) {
-      console.log("password success: ", userId);
-      setLoggedInUser(userId);
-      history.push("/");
+  const handleLogin = async ({ username, password }) => {
+    if (paramsUserId) {
+      await loginUserWithId(paramsUserId, password);
     } else {
-      setLoggedInUser(null);
+      await loginUser(username, password);
     }
   };
-
-  useEffect(() => {
-    console.log("useEffecy triggetres");
-    getUserInfo();
-  }, [userId]);
-
-  if (!user) return null;
 
   return (
     <Box
@@ -43,15 +24,12 @@ export const Login = ({ setLoggedInUser }) => {
         display: "flex",
         flex: 1,
         alignItems: "center",
-        // color: "#fff",
-        // backgroundColor: "#000",
         fontSize: "30px",
       }}
     >
-      <LoginForm onSubmit={attemptLogin} />
+      <LoginForm onSubmit={handleLogin} withUsername={!paramsUserId} />
     </Box>
   );
-  return <div>hello</div>;
 };
 
 export default Login;

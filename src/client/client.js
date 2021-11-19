@@ -12,10 +12,28 @@ export const getEntryById = async (id) => {
   )
 }
 
-export const getAllEntriesByType = async (contentType) => {
-  return client.getEntries({
-    content_type: contentType
+export const getUsersByFieldValue = async ({fieldName, value}) => {
+  const response = await client.getEntries({
+    content_type: "user",
+    [`fields.${fieldName}[match]`]: value
   })
+
+  return response?.items;
+
+}
+
+export const getAllEntriesByType = async (contentType, params) => {
+
+  const response = await client.getEntries({
+    content_type: contentType,
+    ...[params && params.map(({fieldName, value}) => { 
+      console.log("fieldname: ", fieldName)
+      console.log("value: ", value)
+      return {[`fields.${fieldName}[match]`]: value}
+    })]
+  })
+
+  return response.items;
 }
 
 
