@@ -12,14 +12,12 @@ import { AuthContext, AuthHandler } from "./handlers/AuthHandler";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
-  const { user } = useContext(AuthContext)
-
   return (
     <Route
       {...rest}
       render={props => {
-        if (!user) {
-          console.log("no user exists")
+        if (!localStorage.getItem("userId")) {
+          console.log("no user exists in storage")
           return <Redirect to={{ pathname: `/login`, state: { from: props.location } }} />
         }
     

@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 
 import { getEntryById, getUsersByFieldValue } from "../client/client";
@@ -15,6 +15,24 @@ export const AuthHandler = ({ children }) => {
 
   const history = useHistory();
 
+  const storedUserId = useMemo(() => localStorage.getItem("userId"), []);
+
+  const setUserFromLocal = async () => {
+    const storedUser = await getEntryById(storedUserId);
+    setUser(storedUser);
+  };
+
+  useEffect(() => {
+    if (storedUserId) setUserFromLocal();
+  }, [storedUserId]);
+
+  const setUserInLocal = async (userId) => {
+    console.log("setting user in local: ", userId);
+    localStorage.setItem("userId", userId);
+    const u = await getEntryById(userId);
+    setUser(u);
+  };
+
   const loginUserWithId = async (userId, password) => {
     console.log("loginUserWithId called");
     console.log(userId);
@@ -23,7 +41,7 @@ export const AuthHandler = ({ children }) => {
     console.log(userEntry);
     if (userEntry?.fields.password === password) {
       console.log("passwords match, setting user");
-      setUser(userEntry);
+      setUserInLocal(userEntry.sys.id);
       history.push("/");
     }
   };
@@ -34,13 +52,13 @@ export const AuthHandler = ({ children }) => {
       fieldName: "username",
       value: username,
     });
-    const userToCheck = users?.[0];
+    const userEntry = users?.[0];
 
-    console.log(userToCheck);
+    console.log(userEntry);
 
-    if (userToCheck.fields.password === password) {
+    if (userEntry?.fields.password === password) {
       console.log("password matches records");
-      setUser(userToCheck);
+      setUserInLocal(userEntry.sys.id);
       history.push("/");
     }
   };
