@@ -15,35 +15,6 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 import { mainMenuRoutes } from "../../routes";
 
-// const useStyles = makeStyles((theme) => ({
-//   navbar: {
-//     whiteSpace: "nowrap",
-//     // paddingLeft: theme.spacing(20),
-//     // paddingRight: theme.spacing(20),
-//     backgroundColor: "white",
-//     color: "black",
-//     border: "none",
-//     boxShadow: "none",
-//   },
-//   navlinks: {
-//     marginLeft: theme.spacing(10),
-//     display: "flex",
-//   },
-//   logo: {
-//     flexGrow: "1",
-//     cursor: "pointer",
-//   },
-//   link: {
-//     textDecoration: "none",
-//     fontSize: "20px",
-//     marginLeft: theme.spacing(10),
-//     color: "black",
-//     "&:hover": {
-//       borderBottom: "1px solid black",
-//     },
-//   },
-// }));
-
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -55,8 +26,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export const MobileMenu = () => {
   const theme = useTheme();
-  // const { pathname } = useLocation();
-  // const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -89,10 +58,8 @@ export const MobileMenu = () => {
           {mainMenuRoutes
             .filter((route) => !route.isPublic)
             .map(({ name, route }, key) => (
-              <ListItem>
-                <Link key={key} to={route}>
-                  {name}
-                </Link>
+              <ListItem key={key}>
+                <Link to={route}>{name}</Link>
               </ListItem>
             ))}
         </List>
