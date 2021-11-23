@@ -1,7 +1,18 @@
-import { List, ListItem } from "@material-ui/core";
+import {
+  Button,
+  Divider,
+  Grid,
+  List,
+  ListItem,
+  Typography,
+} from "@material-ui/core";
+import { Stack } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useContext, useMemo, useState, useEffect } from "react";
 import { getEntryById } from "../client/client";
+import { RsvpToggleButton } from "../components/Rsvp/RsvpToggleButton";
 import { AuthContext } from "../handlers/AuthHandler";
+import { RsvpForm } from "../components/Rsvp/RsvpForm";
 
 const Rsvp = () => {
   const { user } = useContext(AuthContext);
@@ -44,26 +55,19 @@ const Rsvp = () => {
   }
 
   return (
-    <>
-      <h1>Rsvp</h1>
-      <h2>Name: {user.fields.firstName}</h2>
-      <h2>Household users</h2>
-      <List>
-        {
-          // console.log("hUsers", hUsers)
-          householdUsers?.map((hUser, key) => (
-            <ListItem key={key}>{hUser.fields.firstName}</ListItem>
-          ))
-        }
-      </List>
-
-      <h3>Allergies</h3>
-      <List>
-        {user.fields.allergies?.map((allergy) => (
-          <ListItem>{allergy}</ListItem>
-        ))}
-      </List>
-    </>
+    <Box pt={10}>
+      <Grid container spacing={2}>
+        <Grid item xs>
+          <Stack spacing={2}>
+            <Typography variant="h3">Rsvp</Typography>
+            <Typography variant="body1">Saturday, 5 March 2022</Typography>
+          </Stack>
+        </Grid>
+        <Grid item xs>
+          {<RsvpForm users={householdUsers || [user]} />}
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
