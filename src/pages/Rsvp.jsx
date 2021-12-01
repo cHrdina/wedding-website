@@ -1,16 +1,8 @@
-import {
-  Button,
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  Typography,
-} from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useContext, useMemo, useState, useEffect } from "react";
 import { getEntryById } from "../client/client";
-import { RsvpToggleButton } from "../components/Rsvp/RsvpToggleButton";
 import { AuthContext } from "../handlers/AuthHandler";
 import { RsvpForm } from "../components/Rsvp/RsvpForm";
 
@@ -32,7 +24,6 @@ const Rsvp = () => {
           return userEntry;
         })
       );
-      console.log(hUsers);
       setHouseholdUsers(hUsers);
       return hUsers;
     }
@@ -64,7 +55,9 @@ const Rsvp = () => {
           </Stack>
         </Grid>
         <Grid item xs>
-          {<RsvpForm users={householdUsers || [user]} />}
+          {(householdUsers || user) && (
+            <RsvpForm users={householdUsers || [user]} />
+          )}
         </Grid>
       </Grid>
     </Box>

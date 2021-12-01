@@ -1,13 +1,18 @@
 import React, { useState, createContext, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 
-import { getEntryById, getUsersByFieldValue } from "../client/client";
+import {
+  getEntryById,
+  getUsersByFieldValue,
+  updateEntry,
+} from "../client/client";
 
 export const AuthContext = createContext({
   userId: undefined,
   user: undefined,
   loginUser: undefined,
   loginUserWithId: undefined,
+  updateUser: undefined,
 });
 
 export const AuthHandler = ({ children }) => {
@@ -63,8 +68,15 @@ export const AuthHandler = ({ children }) => {
     }
   };
 
+  const updateUser = async (userId, updates) => {
+    const result = await updateEntry(userId, updates);
+    console.log("update result", result);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loginUser, loginUserWithId }}>
+    <AuthContext.Provider
+      value={{ user, loginUser, loginUserWithId, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

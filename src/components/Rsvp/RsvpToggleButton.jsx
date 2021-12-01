@@ -2,39 +2,27 @@ import React, { useState } from "react";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
-export const RsvpToggleButton = ({ user }) => {
-  const [status, setStatus] = useState(user.fields.rsvpStatus);
-
-  const handleChange = (event, value) => {
-    setStatus(value);
-  };
-
+export const RsvpToggleButton = ({ name, value, onChange }) => {
   return (
-    <ToggleButtonGroup
-      value={status}
-      exclusive
-      onChange={handleChange}
-      aria-label="rsvp toggle buttons"
+    <RadioGroup
+      id={name}
+      aria-label={name}
+      name={name}
+      onChange={onChange}
+      value={value}
     >
-      <ToggleButton
-        sx={{
-          textTransform: "none",
-        }}
-        value="not-attending"
-        aria-label="not attending"
-      >
-        No, I can't attend
-      </ToggleButton>
-      <ToggleButton
-        sx={{
-          textTransform: "none",
-        }}
+      <FormControlLabel
         value="attending"
-        aria-label="attending"
-      >
-        Yes, I'll be there
-      </ToggleButton>
-    </ToggleButtonGroup>
+        control={<Radio />}
+        label="Attending"
+      />
+      <FormControlLabel
+        value="not_attending"
+        control={<Radio />}
+        label="Not Attending"
+      />
+    </RadioGroup>
   );
 };
