@@ -1,13 +1,22 @@
-import { Button, Divider, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  Divider,
+  FormControlLabel,
+  FormGroup,
+  Stack,
+  Typography,
+} from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { RsvpToggleButton } from "./RsvpToggleButton";
 import { Box } from "@mui/system";
 import { useFormik } from "formik";
 import { AuthContext } from "../../handlers/AuthHandler";
 import { updateEntry } from "../../client/client";
+import { DietaryRequirementsSection } from "./DietaryRequirements";
 
 export const RsvpForm = ({ users, onSubmit }) => {
   const { updateUser } = useContext(AuthContext);
@@ -28,14 +37,13 @@ export const RsvpForm = ({ users, onSubmit }) => {
         ...o,
         [userId]: {
           rsvpStatus: user.fields.rsvpStatus,
+          dietaryRequirements: user.fields.dietaryRequirements,
         },
       };
 
       return initValues;
     }, {}),
     onSubmit: async (values) => {
-      // console.log(values);
-
       const updates = Object.entries(values)?.reduce((o, [userId, updates]) => {
         return [
           ...o,
@@ -54,17 +62,15 @@ export const RsvpForm = ({ users, onSubmit }) => {
         })
       );
 
-      console.log(updatedEntries);
+      console.log(values);
+
+      // console.log(updatedEntries);
 
       setSubmitting(false);
       return updatedEntries;
     },
-    onChange: (values) => {
-      // console.log(values);
-    },
+    onChange: (values) => {},
   });
-
-  console.log(values);
 
   return (
     <Stack spacing={4}>
@@ -78,16 +84,24 @@ export const RsvpForm = ({ users, onSubmit }) => {
       </Stack>
       <form onSubmit={handleSubmit} onChange={onChange}>
         <Stack spacing={4} divider={<Divider />}>
-          {users?.map((user, key) => (
+          {users.map((user, key) => (
             <Stack key={key} spacing={2}>
               <Typography mb={2} variant="h6">
                 <i>{user.fields.firstName}</i>
               </Typography>
               <RsvpToggleButton
                 name={`${user.sys.id}.rsvpStatus`}
-                value={values?.[user.sys.id].rsvpStatus}
+                value={values[user.sys.id].rsvpStatus}
                 onChange={handleChange}
               />
+
+              {values[user.sys.id].rsvpStatus === "attending" && (
+                <DietaryRequirementsSection
+                  onChange={handleChange}
+                  user={user}
+                  values={values[user.sys.id].dietaryRequirements}
+                />
+              )}
             </Stack>
           ))}
           <Box width="100%" alignContent="center">

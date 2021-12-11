@@ -50,7 +50,7 @@ const Rsvp = () => {
       <Grid container spacing={2}>
         <Grid item xs>
           <Stack spacing={2}>
-            <Typography variant="h3">Rsvp</Typography>
+            <Typography variant="h3">RSVP</Typography>
             <Typography variant="body1">Saturday, 5 March 2022</Typography>
           </Stack>
         </Grid>
