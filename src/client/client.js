@@ -22,22 +22,30 @@ export const getEntryById = async (id) => {
   )
 }
 
-export const updateEntry = async (id, updateObj) => {
+export const getContentTypeById = async (id) => {
+  return client.getContentType(id);
+}
+
+export const getEntryById_mgmt = async (id) => {
   const entry = await managementClient.getSpace(spaceId)
   .then((space) => space.getEnvironment('master'))
   .then((environment) => environment.getEntry(id))
   .then((entry) => entry);
 
+  return entry;
+}
+
+export const updateEntry = async (id, updateObj) => {
+  const entry = await getEntryById_mgmt(id);
+
   console.log("will update entry", entry)
   console.log("with updates", updateObj)
 
-  const updatedEntry = await entry.patch([
-    ...Object.entries(updateObj).map(([fieldName, value]) => ({
-      op: "replace",
-      path: `/fields/${fieldName}/en-US`,
-      value
-    }))
-  ])
+  Object.entries(updateObj).forEach(([fieldName, value]) => {
+    entry.fields[fieldName] = {"en-US": value};
+  })
+
+  const updatedEntry = await entry.update()
 
   const publishedEntry = await updatedEntry.publish();
   console.log("PUBLISHED", publishedEntry)
@@ -67,6 +75,13 @@ export const getAllEntriesByType = async (contentType, params) => {
   })
 
   return response.items;
+}
+
+export const getValidations = async (contentType) => {
+
+  const response = await getAllEntriesByType(contentType);
+  return response.validations;
+
 }
 
 
