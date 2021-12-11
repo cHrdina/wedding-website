@@ -4,6 +4,7 @@ import {
   FormControlLabel,
   FormGroup,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
@@ -38,6 +39,7 @@ export const RsvpForm = ({ users, onSubmit }) => {
         [userId]: {
           rsvpStatus: user.fields.rsvpStatus,
           dietaryRequirements: user.fields.dietaryRequirements,
+          allergies: user.fields.allergies,
         },
       };
 
@@ -96,11 +98,22 @@ export const RsvpForm = ({ users, onSubmit }) => {
               />
 
               {values[user.sys.id].rsvpStatus === "attending" && (
-                <DietaryRequirementsSection
-                  onChange={handleChange}
-                  user={user}
-                  values={values[user.sys.id].dietaryRequirements}
-                />
+                <Stack spacing={4}>
+                  <DietaryRequirementsSection
+                    onChange={handleChange}
+                    user={user}
+                    values={values[user.sys.id].dietaryRequirements}
+                  />
+                  <TextField
+                    name={`${user.sys.id}.allergies`}
+                    label="Allergies"
+                    placeholder="Please list any allergies here."
+                    multiline
+                    value={values[user.sys.id].allergies}
+                    onChange={handleChange}
+                    minRows={3}
+                  />
+                </Stack>
               )}
             </Stack>
           ))}
