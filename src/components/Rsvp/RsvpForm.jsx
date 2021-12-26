@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Button, Divider, Stack, TextField, Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
@@ -10,9 +11,16 @@ import { RsvpToggleButton } from "./RsvpToggleButton";
 import { AuthContext } from "../../handlers/AuthHandler";
 import { DietaryRequirementsSection } from "./DietaryRequirements";
 
+const sleep = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 export const RsvpForm = ({ users, onSubmit }) => {
   const { updateUser } = useContext(AuthContext);
   const [isSubmitted, setSubmitted] = useState(false);
+  const [isSubmitting, setSubmitting] = useState(false);
+
+  const history = useHistory();
 
   const initialValues = useMemo(() => {
     return users.reduce((o, user) => {
@@ -44,6 +52,7 @@ export const RsvpForm = ({ users, onSubmit }) => {
       <Formik
         initialValues={initialValues}
         onSubmit={async (values) => {
+          setSubmitting(true);
           const updates = Object.entries(values)?.reduce(
             (o, [userId, updates]) => {
               return [
@@ -57,27 +66,25 @@ export const RsvpForm = ({ users, onSubmit }) => {
             []
           );
 
-          const updatedEntries = await Promise.all(
-            updates?.map(async ({ userId, updates }) => {
-              return updateUser(userId, updates);
-            })
-          );
+          try {
+            await Promise.all(
+              updates?.map(async ({ userId, updates }) => {
+                return updateUser(userId, updates);
+              })
+            );
+            setSubmitting(false);
+            setSubmitted(true);
 
-          setSubmitted(true);
-
-          return updatedEntries;
+            await sleep(3000);
+            history.push("/program");
+          } catch (e) {
+            throw e;
+          }
         }}
       >
-        {({
-          handleSubmit,
-          handleChange,
-          onChange,
-          values,
-          dirty,
-          isSubmitting,
-        }) => (
+        {({ handleSubmit, handleChange, onChange, values, dirty }) => (
           <Form>
-            <Stack spacing={4} divider={<Divider />}>
+            <Stack spacing={4} mb={4} divider={<Divider />}>
               {users.map((user, key) => (
                 <Stack key={key} spacing={2}>
                   <Typography mb={2} variant="h6">

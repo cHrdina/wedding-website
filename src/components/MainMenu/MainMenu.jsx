@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     border: "none",
     boxShadow: "none",
+    marginBottom: theme.spacing(4),
   },
   navlinks: {
     marginLeft: theme.spacing(10),

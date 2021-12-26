@@ -4,7 +4,7 @@ import Program from "../pages/Program";
 import OurStory from "../pages/OurStory";
 import Rsvp from "../pages/Rsvp";
 import Registry from "../pages/Registry";
-import Tips from "../pages/Tips";
+import Faqs from "../pages/Faqs";
 
 
 export const mainMenuRoutes = [
@@ -34,8 +34,8 @@ export const mainMenuRoutes = [
     component: Registry,
   },
   {
-    name: "Tips",
-    route: "/tips",
-    component: Tips,
+    name: "FAQs",
+    route: "/faqs",
+    component: Faqs,
   },
 ];
