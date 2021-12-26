@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { Divider, Stack, TextField, Typography } from "@mui/material";
+import { Button, Divider, Stack, TextField, Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
+import DoneIcon from "@mui/icons-material/Done";
 import { Box } from "@mui/system";
 import { Form, Formik, useFormik } from "formik";
 
@@ -11,6 +12,7 @@ import { DietaryRequirementsSection } from "./DietaryRequirements";
 
 export const RsvpForm = ({ users, onSubmit }) => {
   const { updateUser } = useContext(AuthContext);
+  const [isSubmitted, setSubmitted] = useState(false);
 
   const initialValues = useMemo(() => {
     return users.reduce((o, user) => {
@@ -61,6 +63,8 @@ export const RsvpForm = ({ users, onSubmit }) => {
             })
           );
 
+          setSubmitted(true);
+
           return updatedEntries;
         }}
       >
@@ -105,20 +109,31 @@ export const RsvpForm = ({ users, onSubmit }) => {
                   )}
                 </Stack>
               ))}
-              <Box width="100%" alignContent="center">
-                {dirty && (
-                  <LoadingButton
-                    disabled={isSubmitting}
-                    onClick={handleSubmit}
-                    type="submit"
-                    // fullWidth={false}
-                    variant="outlined"
-                    // size="large"
-                    startIcon={<SendIcon />}
-                    loading={isSubmitting}
+              <Box width="50%" alignContent="center">
+                {isSubmitted ? (
+                  <Button
+                    color="success"
+                    variant="contained"
+                    startIcon={<DoneIcon />}
+                    fullWidth
                   >
-                    Submit response
-                  </LoadingButton>
+                    Submitted
+                  </Button>
+                ) : (
+                  dirty && (
+                    <LoadingButton
+                      disabled={isSubmitting}
+                      onClick={handleSubmit}
+                      type="submit"
+                      variant="contained"
+                      startIcon={<SendIcon />}
+                      loading={isSubmitting}
+                      loadingIndicator="Submitting..."
+                      fullWidth
+                    >
+                      Submit response
+                    </LoadingButton>
+                  )
                 )}
               </Box>
             </Stack>
