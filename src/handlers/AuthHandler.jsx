@@ -69,7 +69,9 @@ export const AuthHandler = ({ children }) => {
   };
 
   const updateUser = async (userId, updates) => {
-    const result = await updateEntry(userId, updates);
+    const result = await new Promise((resolve) =>
+      updateEntry(userId, updates).then(resolve)
+    );
     console.log("update result", result);
   };
 

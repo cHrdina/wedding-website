@@ -3,12 +3,7 @@ import { Box } from "@mui/system";
 import { useEffect, useMemo, useState } from "react";
 import { getContentTypeById } from "../../client/client";
 
-export const DietaryRequirementsSection = ({
-  onChange,
-  user,
-  name,
-  values,
-}) => {
+export const DietaryRequirementsSection = ({ onChange, user, values }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [options, setOptions] = useState([]);
 
@@ -22,7 +17,6 @@ export const DietaryRequirementsSection = ({
     const validations = userContentType.fields.find(({ id }) => {
       return id === "dietaryRequirements";
     }).items.validations[0].in;
-    console.log(validations);
 
     setOptions(validations);
 
@@ -40,7 +34,6 @@ export const DietaryRequirementsSection = ({
         control={
           <Checkbox
             value={"dietaryReqs"}
-            // value={isExpanded || undefined}
             checked={isExpanded}
             onChange={() => setIsExpanded((d) => !d)}
           />
