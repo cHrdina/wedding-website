@@ -46,7 +46,7 @@ const Faqs = () => {
   const [faqs, setFaqs] = useState();
 
   const getAllFaqs = async () => {
-    const response = await getAllEntriesByType("tips");
+    const response = await getAllEntriesByType("faq");
     console.log(response);
     console.log(response?.map(({ fields }) => fields));
     setFaqs(response?.map(({ fields }) => fields));
@@ -60,13 +60,7 @@ const Faqs = () => {
     <Stack textAlign="center" spacing={4}>
       <h1>FAQs</h1>
       <Stack spacing={6}>
-        {faqs?.map(({ icon, question, answer }) => (
-          <Faq
-            icon={icon}
-            question={question}
-            answer={answer.content[0].content[0].value}
-          />
-        ))}
+        {faqs?.map((data) => <Faq {...data} />).reverse()}
       </Stack>
     </Stack>
   );
