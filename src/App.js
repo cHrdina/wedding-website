@@ -9,8 +9,9 @@ import { mainMenuRoutes } from "./routes";
 import { Box } from "@mui/system";
 
 import { AuthContext, AuthHandler } from "./handlers/AuthHandler";
+import { BaseLayout } from "./components/Layout/BaseLayout";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, name, ...rest }) => {
 
   return (
     <Route
@@ -22,18 +23,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         }
     
         return (
-          <>
-            <Header />
-            <Box
-              sx={{
-                height: "90vh",
-                marginLeft: 20,
-                marginRight: 20,
-              }}
-            >
-              <Component {...props} />
-            </Box>
-          </>
+          <BaseLayout title={name}>
+            <Component {...props} />
+          </BaseLayout>
+        
         )
 
       
@@ -57,8 +50,8 @@ function App() {
             <Login />
           </Route>
 
-          {mainMenuRoutes.map(({route, component}) => (
-            <PrivateRoute exact path={route} component={component} />
+          {mainMenuRoutes.map(({route, name, component}) => (
+            <PrivateRoute exact path={route} name={name} component={component} />
           ))}
       </ Switch>
   </AuthHandler>

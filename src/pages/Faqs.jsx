@@ -57,11 +57,8 @@ const Faqs = () => {
   }, []);
 
   return (
-    <Stack textAlign="center" spacing={4}>
-      <h1>FAQs</h1>
-      <Stack spacing={6}>
-        {faqs?.map((data) => <Faq {...data} />).reverse()}
-      </Stack>
+    <Stack mt="4rem" spacing={6}>
+      {faqs?.map((data) => <Faq {...data} />).reverse()}
     </Stack>
   );
 };

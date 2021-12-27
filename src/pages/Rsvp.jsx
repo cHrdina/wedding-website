@@ -47,19 +47,14 @@ const Rsvp = () => {
 
   return (
     <Box pt={10}>
-      <Grid container spacing={2}>
-        <Grid item xs>
-          <Stack spacing={2}>
-            <Typography variant="h3">RSVP</Typography>
-            <Typography variant="body1">Saturday, 5 March 2022</Typography>
-          </Stack>
-        </Grid>
-        <Grid item xs>
-          {(householdUsers || user) && (
-            <RsvpForm users={householdUsers || [user]} />
-          )}
-        </Grid>
-      </Grid>
+      <Stack spacing={2}>
+        <Typography variant="h3">RSVP</Typography>
+        <Typography variant="body1">Saturday, 5 March 2022</Typography>
+      </Stack>
+
+      {(householdUsers || user) && (
+        <RsvpForm users={householdUsers || [user]} />
+      )}
     </Box>
   );
 };

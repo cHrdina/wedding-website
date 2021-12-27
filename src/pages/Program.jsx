@@ -1,5 +1,5 @@
 const Program = () => {
-  return <h1>Program</h1>;
+  return <p>Program tings</p>;
 };
 
 export default Program;
