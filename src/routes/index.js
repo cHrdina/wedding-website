@@ -14,7 +14,7 @@ export const mainMenuRoutes = [
     component: Home,
   },
   {
-    name: "Program",
+    name: "Wedding Program",
     route: "/program",
     component: Program,
   },
