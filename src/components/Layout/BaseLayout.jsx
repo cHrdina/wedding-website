@@ -7,15 +7,13 @@ export const BaseLayout = ({ title, children }) => (
   <>
     <Header />
     <Box
-      textAlign={"center"}
-      sx={{
-        height: "90vh",
-        marginLeft: 20,
-        marginRight: 20,
-      }}
+      textAlign="center"
+      display="flex"
+      justifyContent="center"
+      height="90vh"
+      pt={4}
     >
-      <h1>{title}</h1>
-      {children}
+      <Box>{children}</Box>
     </Box>
   </>
 );

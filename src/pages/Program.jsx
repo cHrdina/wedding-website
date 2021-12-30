@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useSpring } from "react-spring";
 
-import { Grid, Divider, Box } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import { Timeline } from "../components/Timeline/Timeline";
 
 const events = [
@@ -31,24 +30,16 @@ const events = [
   },
 ];
 
-const EventTimeline = ({ events }) => {
-  return (
-    <div>
-      <Timeline events={events} />
-    </div>
-  );
-};
-
 const Program = () => {
   return (
     <>
-      <h2>Sat, 5 March '22</h2>
+      <Typography variant="h1">Sat, 5 March '22</Typography>
       <Box
         sx={{
           justifyContent: "center",
         }}
       >
-        <EventTimeline events={events} />
+        <Timeline events={events} />
       </Box>
     </>
   );

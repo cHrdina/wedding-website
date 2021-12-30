@@ -3,11 +3,8 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  CssBaseline,
   useTheme,
   useMediaQuery,
-  ListItem,
-  ListItemText,
 } from "@material-ui/core";
 import { Link, useLocation } from "react-router-dom";
 import { mainMenuRoutes } from "../../routes";
@@ -16,25 +13,28 @@ import { MobileMenu } from "../MobileMenu/MobileMenu";
 const useStyles = makeStyles((theme) => ({
   navbar: {
     whiteSpace: "nowrap",
-    // paddingLeft: theme.spacing(20),
-    // paddingRight: theme.spacing(20),
     backgroundColor: "white",
     color: "black",
     border: "none",
     boxShadow: "none",
     marginBottom: theme.spacing(4),
+    cursor: "arrow",
   },
   navlinks: {
     marginLeft: theme.spacing(10),
     display: "flex",
   },
   logo: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     flexGrow: "1",
     cursor: "pointer",
+    fontFamily: "Bayshore",
+    fontSize: "3rem",
   },
   link: {
     textDecoration: "none",
-    fontSize: "20px",
+    fontSize: "1.5rem",
     marginLeft: theme.spacing(10),
     color: "black",
     "&:hover": {
@@ -51,11 +51,8 @@ export const Header = () => {
 
   return (
     <AppBar position="static" className={classes.navbar}>
-      <CssBaseline />
       <Toolbar>
-        <Typography variant="h4" className={classes.logo}>
-          M{" & "}C
-        </Typography>
+        <Typography className={classes.logo}>M{" & "}C</Typography>
         {isMobile ? (
           <MobileMenu />
         ) : (

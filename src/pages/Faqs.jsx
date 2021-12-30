@@ -1,4 +1,4 @@
-import { Icon, Stack, Typography } from "@mui/material";
+import { Icon, Typography } from "@material-ui/core";
 import { Box } from "@mui/system";
 import CoronavirusOutlinedIcon from "@mui/icons-material/CoronavirusOutlined";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
@@ -12,6 +12,7 @@ import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import DirectionsCarOutlinedIcon from "@mui/icons-material/DirectionsCarOutlined";
 import { getAllEntriesByType } from "../client/client";
 import { useEffect, useState } from "react";
+import { Stack } from "@mui/material";
 
 const iconsRecord = {
   CoronavirusOutlined: CoronavirusOutlinedIcon,
@@ -30,15 +31,17 @@ export const Faq = ({ icon, question, answer }) => {
   const iconComponent = iconsRecord[icon];
 
   return (
-    <Stack textAlign="center">
-      <Box style={{ flex: 1, justifyContent: "center" }}>
-        {iconComponent && <Icon component={iconComponent} />}
-      </Box>
-      <Typography fontWeight="bold" sx={{ textTransform: "uppercase" }}>
-        {question}
-      </Typography>
-      <Typography>{answer}</Typography>
-    </Stack>
+    <>
+      <Stack textAlign="center">
+        <Box style={{ flex: 1, justifyContent: "center" }}>
+          {iconComponent && <Icon component={iconComponent} />}
+        </Box>
+        <Typography component="div">
+          <Box sx={{ fontWeight: "bold", m: 1 }}>{question}</Box>
+          <Box sx={{ fontWeight: "regular", m: 1 }}>{answer}</Box>
+        </Typography>
+      </Stack>
+    </>
   );
 };
 
@@ -57,9 +60,11 @@ const Faqs = () => {
   }, []);
 
   return (
-    <Stack mt="4rem" spacing={6}>
-      {faqs?.map((data) => <Faq {...data} />).reverse()}
-    </Stack>
+    <>
+      <Stack mt="4rem" spacing={6}>
+        {faqs?.map((data) => <Faq {...data} />).reverse()}
+      </Stack>
+    </>
   );
 };
 

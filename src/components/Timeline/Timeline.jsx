@@ -6,6 +6,7 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import { Typography } from "@material-ui/core";
 
 export const Timeline = ({ events }) => {
   return (
@@ -13,12 +14,16 @@ export const Timeline = ({ events }) => {
       <MuiTimeline>
         {events.map(({ title, time }, index) => (
           <TimelineItem>
-            <TimelineOppositeContent>{time}</TimelineOppositeContent>
+            <TimelineOppositeContent>
+              <Typography>{time}</Typography>
+            </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineDot variant="outlined" />
               <TimelineConnector hidden={index === events.length - 1} />
             </TimelineSeparator>
-            <TimelineContent>{title}</TimelineContent>
+            <TimelineContent>
+              <Typography>{title}</Typography>
+            </TimelineContent>
           </TimelineItem>
         ))}
       </MuiTimeline>
