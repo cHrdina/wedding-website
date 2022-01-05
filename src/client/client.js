@@ -86,6 +86,11 @@ export const getMemories = async() => {
   return allMemories;
 }
 
+export const getFaqs = async() => {
+  const allFaqs = await getAllEntriesByType("faq", {order: "fields.order"});
+  return allFaqs;
+}
+
 export const getValidations = async (contentType) => {
 
   const response = await getAllEntriesByType(contentType);
