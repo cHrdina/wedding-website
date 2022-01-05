@@ -46,11 +46,8 @@ const Rsvp = () => {
   }
 
   return (
-    <Box pt={10}>
-      <Stack spacing={2}>
-        <Typography variant="h1">RSVP</Typography>
-        <Typography variant="body1">Saturday, 5 March 2022</Typography>
-      </Stack>
+    <Box pt={5}>
+      <Typography variant="h1">R S V P</Typography>
 
       {(householdUsers || user) && (
         <RsvpForm users={householdUsers || [user]} />

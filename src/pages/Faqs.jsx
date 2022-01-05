@@ -10,7 +10,7 @@ import ChildCareOutlinedIcon from "@mui/icons-material/ChildCareOutlined";
 import CheckroomOutlinedIcon from "@mui/icons-material/CheckroomOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import DirectionsCarOutlinedIcon from "@mui/icons-material/DirectionsCarOutlined";
-import { getAllEntriesByType } from "../client/client";
+import { getAllEntriesByType, getFaqs } from "../client/client";
 import { useEffect, useState } from "react";
 import { Stack } from "@mui/material";
 
@@ -49,7 +49,7 @@ const Faqs = () => {
   const [faqs, setFaqs] = useState();
 
   const getAllFaqs = async () => {
-    const response = await getAllEntriesByType("faq");
+    const response = await getFaqs();
     console.log(response);
     console.log(response?.map(({ fields }) => fields));
     setFaqs(response?.map(({ fields }) => fields));
@@ -62,8 +62,10 @@ const Faqs = () => {
   return (
     <>
       <Typography variant="h1">Questions and Answers</Typography>
-      <Stack mt="4rem" spacing={6}>
-        {faqs?.map((data) => <Faq {...data} />).reverse()}
+      <Stack mt={1} spacing={6}>
+        {faqs?.map((data) => (
+          <Faq {...data} />
+        ))}
       </Stack>
     </>
   );

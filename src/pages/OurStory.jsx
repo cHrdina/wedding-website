@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getMemories } from "../client/client";
 import {
@@ -33,6 +33,7 @@ const OurStory = () => {
 
   return (
     <Box>
+      <Typography variant="h1">Our Story</Typography>
       {mobile ? (
         <StoryTimelineMobile memories={memories} />
       ) : (
