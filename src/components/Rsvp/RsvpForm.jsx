@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Button, Divider, Stack, TextField, Typography } from "@mui/material";
+import { Button, Divider, TextField, Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
 import DoneIcon from "@mui/icons-material/Done";
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
 import { Form, Formik, useFormik } from "formik";
 
 import { RsvpToggleButton } from "./RsvpToggleButton";
 import { AuthContext } from "../../handlers/AuthHandler";
 import { DietaryRequirementsSection } from "./DietaryRequirements";
+import { Stack } from "@mui/material";
 
 const sleep = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -87,7 +88,7 @@ export const RsvpForm = ({ users, onSubmit }) => {
             <Stack spacing={4} mb={4} divider={<Divider />}>
               {users.map((user, key) => (
                 <Stack key={key} spacing={2}>
-                  <Typography mb={2} variant="h6">
+                  <Typography mb={2} variant="h4">
                     <i>{user.fields.firstName}</i>
                   </Typography>
                   <RsvpToggleButton

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { Box, Typography } from "@material-ui/core";
-import { Timeline } from "../components/Timeline/Timeline";
+import { Box, Typography } from "@mui/material";
+import { ProgramTimeline } from "../components/ProgramTimeline/ProgramTimeline";
 
 const events = [
   {
@@ -32,16 +32,18 @@ const events = [
 
 const Program = () => {
   return (
-    <>
-      <Typography variant="h1">Sat, 5 March '22</Typography>
+    <Box textAlign="center">
+      <Typography variant="h1">Sat, 5 March</Typography>
       <Box
         sx={{
+          display: "flex",
           justifyContent: "center",
+          pr: "5%",
         }}
       >
-        <Timeline events={events} />
+        <ProgramTimeline events={events} />
       </Box>
-    </>
+    </Box>
   );
 };
 

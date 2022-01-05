@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useContext, useMemo, useState, useEffect } from "react";
@@ -48,7 +48,7 @@ const Rsvp = () => {
   return (
     <Box pt={10}>
       <Stack spacing={2}>
-        <Typography variant="h3">RSVP</Typography>
+        <Typography variant="h1">RSVP</Typography>
         <Typography variant="body1">Saturday, 5 March 2022</Typography>
       </Stack>
 

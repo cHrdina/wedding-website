@@ -1,73 +1,62 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 
-import { styled, useTheme } from "@mui/material/styles";
-import {
-  Drawer,
-  List,
-  IconButton,
-  makeStyles,
-  ListItem,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import { styled, useTheme } from "@mui/styles";
+import { Drawer, IconButton, Box, Link } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import { mainMenuRoutes } from "../../routes";
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
-}));
+import { ListItemText, MenuItem, MenuList } from "@mui/material";
+import { useToggle } from "../../hooks/useToggle";
 
 export const MobileMenu = () => {
   const theme = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, toggleIsOpen] = useToggle();
 
-  const handleDrawerOpen = () => {
-    setIsOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setIsOpen(false);
+  const isActiveRoute = (route) => {
+    return window.location.pathname === route;
   };
 
   return (
     <>
-      <Drawer
-        open={isOpen}
-        onClose={() => {
-          setIsOpen(false);
-        }}
-        anchor="right"
-        variant="temporary"
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+      <Drawer open={isOpen} anchor="right" variant="temporary">
+        <Box p={2} sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <IconButton onClick={toggleIsOpen}>
+            <ChevronRightIcon />
           </IconButton>
-        </DrawerHeader>
-        <List>
-          {mainMenuRoutes
-            .filter((route) => !route.isPublic)
-            .map(({ name, route }, key) => (
-              <ListItem key={key}>
-                <Link to={route}>{name}</Link>
-              </ListItem>
-            ))}
-        </List>
+        </Box>
+        <Box sx={{ width: "100vw", maxWidth: "100%" }}>
+          <MenuList>
+            {mainMenuRoutes
+              .filter((route) => !route.isPublic)
+              .map(({ name, route }, index) => (
+                <Link
+                  key={index}
+                  href={route}
+                  variant="body1"
+                  style={{ textDecoration: "none" }}
+                >
+                  <MenuItem
+                    selected={isActiveRoute(route)}
+                    sx={{ textAlign: "center" }}
+                  >
+                    <ListItemText
+                      primary={name}
+                      primaryTypographyProps={{
+                        fontFamily: "Montserrat",
+                        fontSize: "3rem",
+                      }}
+                    />
+                  </MenuItem>
+                </Link>
+              ))}
+          </MenuList>
+        </Box>
       </Drawer>
       <IconButton
         color="inherit"
         aria-label="open drawer"
-        onClick={handleDrawerOpen}
+        onClick={toggleIsOpen}
         edge="start"
         sx={{ ...(isOpen && { display: "none" }) }}
       >

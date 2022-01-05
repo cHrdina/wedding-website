@@ -1,3 +1,5 @@
+
+
 const contentful = require("contentful");
 const management = require("contentful-management")
 
@@ -20,6 +22,10 @@ export const getEntryById = async (id) => {
   return client.getEntry(
     id
   )
+}
+
+export const getAssetById = async (id) => {
+  return client.getAsset(id);
 }
 
 export const getContentTypeById = async (id) => {
@@ -67,14 +73,17 @@ export const getAllEntriesByType = async (contentType, params) => {
 
   const response = await client.getEntries({
     content_type: contentType,
-    ...[params && params.map(({fieldName, value}) => { 
-      console.log("fieldname: ", fieldName)
-      console.log("value: ", value)
-      return {[`fields.${fieldName}[match]`]: value}
-    })]
+    ...params
+
   })
 
   return response.items;
+}
+
+
+export const getMemories = async() => {
+  const allMemories = await getAllEntriesByType("memory", {order: "fields.order"});
+  return allMemories;
 }
 
 export const getValidations = async (contentType) => {

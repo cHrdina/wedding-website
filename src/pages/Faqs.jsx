@@ -1,4 +1,4 @@
-import { Icon, Typography } from "@material-ui/core";
+import { Icon, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import CoronavirusOutlinedIcon from "@mui/icons-material/CoronavirusOutlined";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
@@ -61,6 +61,7 @@ const Faqs = () => {
 
   return (
     <>
+      <Typography variant="h1">Questions and Answers</Typography>
       <Stack mt="4rem" spacing={6}>
         {faqs?.map((data) => <Faq {...data} />).reverse()}
       </Stack>

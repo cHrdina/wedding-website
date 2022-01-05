@@ -1,9 +1,13 @@
-import { Box, Container, Typography } from "@material-ui/core";
+import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 import { InviteCard } from "../components/InviteCard/InviteCard";
 
 const Home = () => {
-  return <InviteCard />;
+  return (
+    <Box sx={{ margin: "auto" }}>
+      <InviteCard />
+    </Box>
+  );
 };
 
 export default Home;

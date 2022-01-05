@@ -6,23 +6,27 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
-export const Timeline = ({ events }) => {
+export const ProgramTimeline = ({ events }) => {
+  const itemStyle = {
+    fontSize: "1.2rem",
+  };
+
   return (
     <>
-      <MuiTimeline>
+      <MuiTimeline sx={{ width: "50vw" }}>
         {events.map(({ title, time }, index) => (
           <TimelineItem>
             <TimelineOppositeContent>
-              <Typography>{time}</Typography>
+              <Typography style={itemStyle}>{time}</Typography>
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineDot variant="outlined" />
               <TimelineConnector hidden={index === events.length - 1} />
             </TimelineSeparator>
             <TimelineContent>
-              <Typography>{title}</Typography>
+              <Typography style={itemStyle}>{title}</Typography>
             </TimelineContent>
           </TimelineItem>
         ))}

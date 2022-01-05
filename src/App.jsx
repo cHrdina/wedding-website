@@ -12,7 +12,7 @@ import { mainMenuRoutes } from "./routes";
 
 import { AuthHandler } from "./handlers/AuthHandler";
 import { BaseLayout } from "./components/Layout/BaseLayout";
-import { createTheme, ThemeProvider } from "@material-ui/core";
+import { createTheme, ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
 const PrivateRoute = ({ component: Component, name, ...rest }) => {
@@ -42,26 +42,42 @@ const PrivateRoute = ({ component: Component, name, ...rest }) => {
 function App() {
   const theme = createTheme({
     overrides: {
-      MuiCssBaseline: {
+      CssBaseline: {
         "@global": {
           html: {
-            fontFamily: ["Montserrat", "sans-serif"].join(","),
+            fontFamily: "Montserrat",
             color: "#1E1E1E",
           },
         },
       },
     },
     pallete: {
+      primary: {
+        color: "#1E1E1E",
+      },
       text: {
-        primary: "#1E1E1E",
+        primary: {
+          color: "#1E1E1E",
+        },
       },
     },
     typography: {
+      fontFamily: ["Montserrat, sans-serif"],
       h1: {
-        fontFamily: "Bayshore",
+        fontFamily: ["Bayshore", "GFS Didot", "serif"].join(","),
+        fontSize: "5rem",
+        letterSpacing: 0.5,
       },
+      h4: { fontFamily: ["GFS Didot", "serif"].join(",") },
       body1: {
         fontFamily: ["Montserrat", "sans-serif"].join(","),
+      },
+      subtitle1: {
+        fontFamily: ["Montserrat", "sans-serif"].join(","),
+      },
+      logo: {
+        fontFamily: ["Bayshore", "sans-serif"].join(","),
+        fontSize: "3rem",
       },
     },
   });

@@ -34,8 +34,8 @@ export const mainMenuRoutes = [
     component: Registry,
   },
   {
-    name: "FAQs",
-    route: "/faqs",
+    name: "Q+A",
+    route: "/qanda",
     component: Faqs,
   },
 ];
