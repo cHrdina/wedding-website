@@ -4,6 +4,7 @@ import { styled, useTheme } from "@mui/styles";
 import { Drawer, IconButton, Box, Link } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 import { mainMenuRoutes } from "../../routes";
 import { ListItemText, MenuItem, MenuList } from "@mui/material";
@@ -19,10 +20,10 @@ export const MobileMenu = () => {
 
   return (
     <>
-      <Drawer open={isOpen} anchor="right" variant="temporary">
+      <Drawer open={isOpen} anchor="top" variant="temporary">
         <Box p={2} sx={{ display: "flex", justifyContent: "flex-end" }}>
           <IconButton onClick={toggleIsOpen}>
-            <ChevronRightIcon />
+            <ExpandLessIcon />
           </IconButton>
         </Box>
         <Box sx={{ width: "100vw", maxWidth: "100%" }}>
@@ -44,7 +45,7 @@ export const MobileMenu = () => {
                       primary={name}
                       primaryTypographyProps={{
                         fontFamily: "Montserrat",
-                        fontSize: "3rem",
+                        fontSize: "5vh",
                       }}
                     />
                   </MenuItem>
