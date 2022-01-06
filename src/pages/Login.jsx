@@ -20,11 +20,12 @@ export const Login = () => {
   return (
     <Box
       sx={{
-        height: "100vh",
         display: "flex",
         flex: 1,
         alignItems: "center",
+        justifyContent: "center",
         fontSize: "30px",
+        flexDirection: "column",
       }}
     >
       <LoginForm onSubmit={handleLogin} withUsername={!paramsUserId} />

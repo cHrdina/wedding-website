@@ -14,6 +14,13 @@ import { AuthHandler } from "./handlers/AuthHandler";
 import { BaseLayout } from "./components/Layout/BaseLayout";
 import { createTheme, ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import { PublicLayout } from "./components/Layout/PublicLayout";
+
+const themeColors = {
+  text: {
+    primary: "#1e1e1e",
+  },
+};
 
 const PrivateRoute = ({ component: Component, name, ...rest }) => {
   return (
@@ -46,20 +53,68 @@ function App() {
         "@global": {
           html: {
             fontFamily: "Montserrat",
-            color: "#1E1E1E",
+            fontWeight: 400,
+            color: themeColors.text.primary,
+          },
+        },
+      },
+    },
+    components: {
+      MuiMenuItem: {
+        styleOverrides: {
+          root: {
+            color: themeColors.text.primary,
+          },
+        },
+      },
+      MuiInput: {
+        styleOverrides: {
+          root: {
+            fontSize: "1.5rem",
+          },
+          underline: {
+            "&::after": {
+              borderColor: themeColors.text.primary,
+            },
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            fontSize: "1.5rem",
+            letterSpacing: 1,
+            fontWeight: 400,
+            color: themeColors.text.primary,
+            whiteSpace: "nowrap",
+            minWidth: "max-content",
+            "&:hover": {
+              borderColor: themeColors.text.primary,
+              backgroundColor: "#ffefe6",
+            },
+          },
+          outlined: {
+            borderColor: themeColors.text.primary,
+          },
+          outlinedPrimary: {
+            borderColor: themeColors.text.primary,
+            // border: "0.5px solid",
           },
         },
       },
     },
     pallete: {
       primary: {
-        color: "#1E1E1E",
+        color: themeColors.text.primary,
       },
       text: {
         primary: {
-          color: "#1E1E1E",
+          color: themeColors.text.primary,
         },
       },
+    },
+    background: {
+      default: "#fff",
     },
     typography: {
       fontFamily: ["Montserrat, sans-serif"],
@@ -89,10 +144,14 @@ function App() {
           <CssBaseline />
           <Switch>
             <Route exact path={`/login`}>
-              <Login />
+              <PublicLayout>
+                <Login />
+              </PublicLayout>
             </Route>
             <Route path={`/login/:id`}>
-              <Login />
+              <PublicLayout>
+                <Login />
+              </PublicLayout>
             </Route>
             {mainMenuRoutes.map(({ route, name, component }) => (
               <PrivateRoute
