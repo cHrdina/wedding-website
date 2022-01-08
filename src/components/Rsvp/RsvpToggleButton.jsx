@@ -6,23 +6,20 @@ import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 export const RsvpToggleButton = ({ name, value, onChange }) => {
   return (
-    <RadioGroup
+    <ToggleButtonGroup
       id={name}
       aria-label={name}
-      name={name}
-      onChange={onChange}
+      onChange={(event, val) => onChange(name, val)}
+      exclusive
       value={value}
+      size="large"
     >
-      <FormControlLabel
-        value="attending"
-        control={<Radio />}
-        label="Attending"
-      />
-      <FormControlLabel
-        value="not_attending"
-        control={<Radio />}
-        label="Not Attending"
-      />
-    </RadioGroup>
+      <ToggleButton value="attending" sx={{ paddingX: 4 }}>
+        Yes, I'll be there
+      </ToggleButton>
+      <ToggleButton value="not_attending" sx={{ paddingX: 4 }}>
+        No, I can't attend
+      </ToggleButton>
+    </ToggleButtonGroup>
   );
 };

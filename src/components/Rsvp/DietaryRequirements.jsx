@@ -1,7 +1,17 @@
-import { Checkbox, FormControlLabel, FormGroup, Stack } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useMemo, useState } from "react";
 import { getContentTypeById } from "../../client/client";
+import CheckIcon from "@mui/icons-material/Check";
+import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
+
+const UncheckedIcon = () => <span></span>;
 
 export const DietaryRequirementsSection = ({ onChange, user, values }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -36,6 +46,13 @@ export const DietaryRequirementsSection = ({ onChange, user, values }) => {
             value={"dietaryReqs"}
             checked={isExpanded}
             onChange={() => setIsExpanded((d) => !d)}
+            checkedIcon={
+              <CheckBoxOutlinedIcon
+                sx={{ fontWeight: "100" }}
+                style={{ strokeWidth: "1px" }}
+              />
+            }
+            // icon={<UncheckedIcon />}
           />
         }
         label="I have dietary requirements"
@@ -47,15 +64,24 @@ export const DietaryRequirementsSection = ({ onChange, user, values }) => {
             {options?.map((option) => (
               <FormControlLabel
                 key={userId + option}
-                control={<Checkbox />}
+                control={<Checkbox checkedIcon={<CheckBoxOutlinedIcon />} />}
                 name={`${userId}.dietaryRequirements`}
                 label={option}
                 value={option}
-                checked={values?.includes(option)}
+                checked={values?.dietaryRequirements?.includes(option)}
                 onChange={onChange}
               />
             ))}
           </FormGroup>
+          <TextField
+            name={`${userId}.allergies`}
+            label="Allergies"
+            placeholder="Please list any allergies here."
+            multiline
+            value={values?.allergies}
+            onChange={onChange}
+            minRows={3}
+          />
         </Stack>
       )}
     </Box>

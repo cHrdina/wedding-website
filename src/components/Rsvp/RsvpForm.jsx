@@ -41,15 +41,9 @@ export const RsvpForm = ({ users, onSubmit }) => {
   }, [users]);
 
   return (
-    <Stack spacing={4}>
-      <Stack spacing={2}>
-        <Typography variant="h5">
-          Will you be able to attend our wedding in Palm Beach, Australia?
-        </Typography>
-        <Typography variant="subtitle2">
-          Please respond by 31 Feb 2022
-        </Typography>
-      </Stack>
+    <Stack spacing={4} mt={4}>
+      <Typography variant="h5">Will you be attending our wedding?</Typography>
+
       <Formik
         initialValues={initialValues}
         onSubmit={async (values) => {
@@ -83,70 +77,75 @@ export const RsvpForm = ({ users, onSubmit }) => {
           }
         }}
       >
-        {({ handleSubmit, handleChange, onChange, values, dirty }) => (
-          <Form>
-            <Stack spacing={4} mb={4} divider={<Divider />}>
-              {users.map((user, key) => (
-                <Stack key={key} spacing={2}>
-                  <Typography mb={2} variant="h4">
-                    <i>{user.fields.firstName}</i>
-                  </Typography>
-                  <RsvpToggleButton
-                    name={`${user.sys.id}.rsvpStatus`}
-                    value={values[user.sys.id].rsvpStatus}
-                    onChange={handleChange}
-                  />
+        {({
+          handleSubmit,
+          handleChange,
+          onChange,
+          values,
+          dirty,
+          setFieldValue,
+        }) => {
+          const handleRsvpStatusChange = (fieldName, rsvpStatus) => {
+            setFieldValue(fieldName, rsvpStatus);
+          };
 
-                  {values[user.sys.id].rsvpStatus === "attending" && (
-                    <Stack spacing={4}>
-                      <DietaryRequirementsSection
-                        onChange={handleChange}
-                        user={user}
-                        values={values[user.sys.id].dietaryRequirements}
-                      />
-                      <TextField
-                        name={`${user.sys.id}.allergies`}
-                        label="Allergies"
-                        placeholder="Please list any allergies here."
-                        multiline
-                        value={values[user.sys.id].allergies}
-                        onChange={handleChange}
-                        minRows={3}
-                      />
-                    </Stack>
-                  )}
-                </Stack>
-              ))}
-              <Box width="50%" alignContent="center">
-                {isSubmitted ? (
-                  <Button
-                    color="success"
-                    variant="contained"
-                    startIcon={<DoneIcon />}
-                    fullWidth
-                  >
-                    Submitted
-                  </Button>
-                ) : (
-                  dirty && (
-                    <LoadingButton
-                      disabled={isSubmitting}
-                      onClick={handleSubmit}
-                      type="submit"
+          return (
+            <Form>
+              <Stack spacing={4} mb={4} divider={<Divider />}>
+                {users.map((user, key) => (
+                  <Stack key={key} spacing={2}>
+                    <Typography mb={2} variant="body1" fontSize={"1.5rem"}>
+                      <b>{user.fields.firstName}</b>
+                    </Typography>
+                    <RsvpToggleButton
+                      name={`${user.sys.id}.rsvpStatus`}
+                      value={values[user.sys.id].rsvpStatus}
+                      onChange={handleRsvpStatusChange}
+                    />
+
+                    {values[user.sys.id].rsvpStatus === "attending" && (
+                      <Stack spacing={4}>
+                        <DietaryRequirementsSection
+                          onChange={handleChange}
+                          user={user}
+                          values={values[user.sys.id]}
+                        />
+                      </Stack>
+                    )}
+                  </Stack>
+                ))}
+                <Box width="50%" alignContent="center">
+                  {isSubmitted ? (
+                    <Button
+                      color="success"
                       variant="contained"
-                      startIcon={<SendIcon />}
-                      loading={isSubmitting}
-                      loadingIndicator="Submitting..."
+                      startIcon={<DoneIcon />}
                       fullWidth
                     >
-                      Submit response
-                    </LoadingButton>
-                  )
-                )}
-              </Box>
-            </Stack>
-          </Form>
-        )}
+                      Submitted
+                    </Button>
+                  ) : (
+                    dirty && (
+                      <LoadingButton
+                        disabled={isSubmitting}
+                        onClick={handleSubmit}
+                        type="submit"
+                        variant="contained"
+                        size="large"
+                        startIcon={<SendIcon />}
+                        loading={isSubmitting}
+                        loadingIndicator="Submitting..."
+                        fullWidth
+                      >
+                        Submit response
+                      </LoadingButton>
+                    )
+                  )}
+                </Box>
+              </Stack>
+            </Form>
+          );
+        }}
       </Formik>
     </Stack>
   );

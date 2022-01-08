@@ -17,9 +17,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { PublicLayout } from "./components/Layout/PublicLayout";
 
 const themeColors = {
-  text: {
-    primary: "#1e1e1e",
-  },
+  darkGrey: "#1e1e1e",
+  peach: "#ffefe6",
+  peachDark: "#f3d7c8",
 };
 
 const PrivateRoute = ({ component: Component, name, ...rest }) => {
@@ -54,7 +54,7 @@ function App() {
           html: {
             fontFamily: "Montserrat",
             fontWeight: 400,
-            color: themeColors.text.primary,
+            color: themeColors.darkGrey,
           },
         },
       },
@@ -63,7 +63,7 @@ function App() {
       MuiMenuItem: {
         styleOverrides: {
           root: {
-            color: themeColors.text.primary,
+            color: themeColors.darkGrey,
           },
         },
       },
@@ -74,7 +74,45 @@ function App() {
           },
           underline: {
             "&::after": {
-              borderColor: themeColors.text.primary,
+              borderColor: themeColors.darkGrey,
+            },
+          },
+        },
+      },
+      MuiCheckbox: {
+        styleOverrides: {
+          root: {
+            "& .Mui-checked": {
+              backgroundColor: "#fff",
+            },
+            "& .MuiSvgIcon-root": {
+              color: themeColors.darkGrey,
+            },
+          },
+        },
+      },
+      MuiToggleButton: {
+        styleOverrides: {
+          root: {
+            border: "1px solid",
+            borderColor: themeColors.darkGrey,
+            textTransform: "none",
+            color: themeColors.darkGrey,
+
+            "&.Mui-selected": {
+              "&:hover": {
+                borderColor: themeColors.darkGrey,
+                backgroundColor: themeColors.peach,
+              },
+              backgroundColor: themeColors.peach,
+            },
+            "&.MuiToggleButtonGroup-grouped:not(:first-of-type)": {
+              border: "1px solid",
+              borderColor: themeColors.darkGrey,
+            },
+            "&:hover": {
+              borderColor: themeColors.darkGrey,
+              backgroundColor: themeColors.peach,
             },
           },
         },
@@ -82,35 +120,43 @@ function App() {
       MuiButton: {
         styleOverrides: {
           root: {
-            fontSize: "1.5rem",
+            textTransform: "none",
             letterSpacing: 1,
             fontWeight: 400,
-            color: themeColors.text.primary,
+            color: themeColors.darkGrey,
             whiteSpace: "nowrap",
             minWidth: "max-content",
+            backgroundColor: themeColors.peach,
             "&:hover": {
-              borderColor: themeColors.text.primary,
-              backgroundColor: "#ffefe6",
+              borderColor: themeColors.darkGrey,
+              backgroundColor: "#f3d7c8",
             },
           },
           outlined: {
-            borderColor: themeColors.text.primary,
+            borderColor: themeColors.darkGrey,
           },
           outlinedPrimary: {
-            borderColor: themeColors.text.primary,
+            borderColor: themeColors.darkGrey,
             // border: "0.5px solid",
           },
         },
       },
     },
     pallete: {
+      default: {
+        color: themeColors.peach,
+      },
       primary: {
-        color: themeColors.text.primary,
+        color: themeColors.darkGrey,
+        main: themeColors.peach,
       },
       text: {
         primary: {
-          color: themeColors.text.primary,
+          color: themeColors.darkGrey,
         },
+      },
+      action: {
+        hover: themeColors.peach,
       },
     },
     background: {

@@ -20,3 +20,58 @@
 .link-active {
   border-bottom: 1px solid black;
 }
+
+
+/* For Hamburger animation */
+
+.hamburger span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: var(--color-dark-grey);
+  border-radius: 4px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
+}
+.hamburger span:nth-child(1) {
+  top: 4px;
+}
+.hamburger span:nth-child(2),
+.hamburger span:nth-child(3) {
+  top: 50%;
+}
+.hamburger span:nth-child(4) {
+  bottom: 0;
+}
+.hamburger.open span:nth-child(1) {
+  top: 50%;
+  width: 0%;
+  left: 50%;
+}
+.hamburger.open span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.hamburger.open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.hamburger.open span:nth-child(4) {
+  top: 50%;
+  width: 0%;
+  left: 50%;
+}
+
