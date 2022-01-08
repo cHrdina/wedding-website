@@ -54,6 +54,7 @@ function App() {
           html: {
             fontFamily: "Montserrat",
             fontWeight: 400,
+            // letterSpacing: 1,
             color: themeColors.darkGrey,
           },
         },
@@ -121,7 +122,7 @@ function App() {
         styleOverrides: {
           root: {
             textTransform: "none",
-            letterSpacing: 1,
+            // letterSpacing: 1,
             fontWeight: 400,
             color: themeColors.darkGrey,
             whiteSpace: "nowrap",

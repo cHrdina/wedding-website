@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Divider, TextField, Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -11,6 +11,7 @@ import { RsvpToggleButton } from "./RsvpToggleButton";
 import { AuthContext } from "../../handlers/AuthHandler";
 import { DietaryRequirementsSection } from "./DietaryRequirements";
 import { Stack } from "@mui/material";
+import { Confetti } from "../Confetti/Confetti";
 
 const sleep = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -20,6 +21,9 @@ export const RsvpForm = ({ users, onSubmit }) => {
   const { updateUser } = useContext(AuthContext);
   const [isSubmitted, setSubmitted] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  const confettiRef = useRef(null);
 
   const history = useHistory();
 
@@ -70,8 +74,11 @@ export const RsvpForm = ({ users, onSubmit }) => {
             setSubmitting(false);
             setSubmitted(true);
 
-            await sleep(3000);
-            history.push("/program");
+            // shoot confetti
+            confettiRef?.current?.rewardMe();
+
+            // await sleep(3000);
+            // history.push("/program");
           } catch (e) {
             throw e;
           }
@@ -109,38 +116,42 @@ export const RsvpForm = ({ users, onSubmit }) => {
                           onChange={handleChange}
                           user={user}
                           values={values[user.sys.id]}
+                          setFieldValue={setFieldValue}
                         />
                       </Stack>
                     )}
                   </Stack>
                 ))}
                 <Box width="50%" alignContent="center">
-                  {isSubmitted ? (
-                    <Button
-                      color="success"
-                      variant="contained"
-                      startIcon={<DoneIcon />}
-                      fullWidth
-                    >
-                      Submitted
-                    </Button>
-                  ) : (
-                    dirty && (
-                      <LoadingButton
-                        disabled={isSubmitting}
-                        onClick={handleSubmit}
-                        type="submit"
+                  <Confetti ref={confettiRef}>
+                    {isSubmitted && !dirty ? (
+                      <Button
+                        color="success"
                         variant="contained"
-                        size="large"
-                        startIcon={<SendIcon />}
-                        loading={isSubmitting}
-                        loadingIndicator="Submitting..."
+                        startIcon={<DoneIcon />}
+                        type="button"
                         fullWidth
                       >
-                        Submit response
-                      </LoadingButton>
-                    )
-                  )}
+                        Submitted
+                      </Button>
+                    ) : (
+                      dirty && (
+                        <LoadingButton
+                          disabled={isSubmitting}
+                          onClick={handleSubmit}
+                          type="submit"
+                          variant="contained"
+                          size="large"
+                          startIcon={<SendIcon />}
+                          loading={isSubmitting}
+                          loadingIndicator="Submitting..."
+                          fullWidth
+                        >
+                          Submit response
+                        </LoadingButton>
+                      )
+                    )}
+                  </Confetti>
                 </Box>
               </Stack>
             </Form>

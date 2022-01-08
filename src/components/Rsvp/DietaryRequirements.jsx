@@ -11,9 +11,12 @@ import { getContentTypeById } from "../../client/client";
 import CheckIcon from "@mui/icons-material/Check";
 import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 
-const UncheckedIcon = () => <span></span>;
-
-export const DietaryRequirementsSection = ({ onChange, user, values }) => {
+export const DietaryRequirementsSection = ({
+  onChange,
+  user,
+  values,
+  setFieldValue,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [options, setOptions] = useState([]);
 
@@ -33,6 +36,15 @@ export const DietaryRequirementsSection = ({ onChange, user, values }) => {
     return validations;
   };
 
+  const handleParentChange = () => {
+    if (isExpanded) {
+      values?.dietaryRequirements?.forEach(({ name }) =>
+        setFieldValue(name, "")
+      );
+    }
+    setIsExpanded((d) => !d);
+  };
+
   useEffect(() => {
     setIsExpanded(!!user.fields.dietaryRequirements?.length);
     getAvailableOptions();
@@ -45,14 +57,8 @@ export const DietaryRequirementsSection = ({ onChange, user, values }) => {
           <Checkbox
             value={"dietaryReqs"}
             checked={isExpanded}
-            onChange={() => setIsExpanded((d) => !d)}
-            checkedIcon={
-              <CheckBoxOutlinedIcon
-                sx={{ fontWeight: "100" }}
-                style={{ strokeWidth: "1px" }}
-              />
-            }
-            // icon={<UncheckedIcon />}
+            onChange={() => handleParentChange()}
+            checkedIcon={<CheckBoxOutlinedIcon />}
           />
         }
         label="I have dietary requirements"
