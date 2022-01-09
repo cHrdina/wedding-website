@@ -38,9 +38,8 @@ export const DietaryRequirementsSection = ({
 
   const handleParentChange = () => {
     if (isExpanded) {
-      values?.dietaryRequirements?.forEach(({ name }) =>
-        setFieldValue(name, "")
-      );
+      setFieldValue(`${userId}.dietaryRequirements`, []);
+      setFieldValue(`${userId}.allergies`, null);
     }
     setIsExpanded((d) => !d);
   };
