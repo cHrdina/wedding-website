@@ -20,6 +20,7 @@ export const Header = () => {
 
   return (
     <AppBar
+      elevation={0}
       position="static"
       sx={{ bgcolor: "background.paper", color: "text.primary" }}
     >

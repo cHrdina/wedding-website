@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import Program from "../pages/Program";
 import OurStory from "../pages/OurStory";
 import Rsvp from "../pages/Rsvp";
-import Registry from "../pages/Registry";
+import Recommendations from "../pages/Recommendations";
 import Faqs from "../pages/Faqs";
 
 
@@ -29,12 +29,12 @@ export const mainMenuRoutes = [
     component: Rsvp,
   },
   {
-    name: "Registry",
-    route: "/registry",
-    component: Registry,
+    name: "Recommendations",
+    route: "/recommend",
+    component: Recommendations,
   },
   {
-    name: "Q+A",
+    name: "Q & A",
     route: "/qanda",
     component: Faqs,
   },

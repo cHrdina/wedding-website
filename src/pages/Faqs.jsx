@@ -61,7 +61,9 @@ const Faqs = () => {
 
   return (
     <>
-      <Typography variant="h1">Questions and Answers</Typography>
+      <Typography variant="h1" mb={4}>
+        Q & A
+      </Typography>
       <Stack mt={1} spacing={6}>
         {faqs?.map((data) => (
           <Faq {...data} />

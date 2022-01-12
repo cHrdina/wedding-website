@@ -47,15 +47,12 @@ const Rsvp = () => {
 
   return (
     <>
-      <Typography variant="h1" sx={{ my: 4 }}>
-        R S V P
-      </Typography>
-      <Typography variant="body1">
-        Please respond by Saturday, 5 February 2022
+      <Typography variant="h1" sx={{ mb: 4 }}>
+        RSVP
       </Typography>
       <Box
         textAlign="left"
-        pt={5}
+        // pt={5}
         sx={{ display: "flex", justifyContent: "center", whiteSpace: "nowrap" }}
       >
         {(householdUsers || user) && (

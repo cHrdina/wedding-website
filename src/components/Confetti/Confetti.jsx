@@ -3,7 +3,14 @@ import React, { useRef, forwardRef } from "react";
 
 import Reward from "react-rewards";
 
-const confettiColors = ["#ee6352", "#59cd90", "#2C3EC1", "#fac05e", "#f79d84"];
+const confettiColors = [
+  "#ee6352",
+  "#94dfb7",
+  "#ffefe6",
+  "#fac05e",
+  "#f79d84",
+  "#B76E79",
+];
 
 const config = {
   lifetime: 82,
@@ -16,9 +23,9 @@ const config = {
   colors: confettiColors,
 };
 
-export const Confetti = forwardRef(({ children }, ref) => (
+export const Confetti = forwardRef(({ children, type = "confetti" }, ref) => (
   <Box width="100%">
-    <Reward type="confetti" ref={ref} config={config}>
+    <Reward type={type} ref={ref} config={config}>
       {children}
     </Reward>
   </Box>

@@ -9,7 +9,7 @@ export const InviteCard = () => {
   const backgroundOffset = { x: 70, y: -10 };
   return (
     <Box position="relative" mt={10}>
-      <Box
+      {/* <Box
         position="absolute"
         top={backgroundOffset.y}
         left={`calc(50% + ${backgroundOffset.x}px)`}
@@ -21,7 +21,7 @@ export const InviteCard = () => {
           transformOrigin: "bottom right",
           transform: "rotate(2deg) translateX(-50%) ",
         }}
-      ></Box>
+      ></Box> */}
       <Box
         position="absolute"
         top={0}

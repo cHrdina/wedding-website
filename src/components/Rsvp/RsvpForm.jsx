@@ -12,6 +12,12 @@ import { AuthContext } from "../../handlers/AuthHandler";
 import { DietaryRequirementsSection } from "./DietaryRequirements";
 import { Stack } from "@mui/material";
 import { Confetti } from "../Confetti/Confetti";
+import { SuggestionField } from "../SuggestionField/SuggestionField";
+
+const testSuggestions = [
+  "I suggest you shower because u smell",
+  "No really, please take a shower",
+];
 
 const sleep = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -45,12 +51,20 @@ export const RsvpForm = ({ users, onSubmit }) => {
   }, [users]);
 
   return (
-    <Stack spacing={4} mt={4}>
-      <Typography variant="h5">Will you be attending our wedding?</Typography>
+    <Stack spacing={4}>
+      <Box>
+        <Typography variant="h5" mb={1}>
+          Will you be attending our wedding in Palm Beach?
+        </Typography>
+        <Typography variant="subtitle1">
+          Please respond by Saturday, 5 February 2022
+        </Typography>
+      </Box>
 
       <Formik
         initialValues={initialValues}
-        onSubmit={async (values) => {
+        // enableReinitialize
+        onSubmit={async (values, { resetForm }) => {
           setSubmitting(true);
           const updates = Object.entries(values)?.reduce(
             (o, [userId, updates]) => {
@@ -82,6 +96,9 @@ export const RsvpForm = ({ users, onSubmit }) => {
           } catch (e) {
             throw e;
           }
+          resetForm({
+            values,
+          });
         }}
       >
         {({
@@ -97,64 +114,68 @@ export const RsvpForm = ({ users, onSubmit }) => {
           };
 
           return (
-            <Form>
-              <Stack spacing={4} mb={4} divider={<Divider />}>
-                {users.map((user, key) => (
-                  <Stack key={key} spacing={2}>
-                    <Typography mb={2} variant="body1" fontSize={"1.5rem"}>
-                      <b>{user.fields.firstName}</b>
-                    </Typography>
-                    <RsvpToggleButton
-                      name={`${user.sys.id}.rsvpStatus`}
-                      value={values[user.sys.id].rsvpStatus}
-                      onChange={handleRsvpStatusChange}
-                    />
+            <>
+              <Form>
+                <Stack spacing={4} mb={4} divider={<Divider />}>
+                  {users.map((user, key) => (
+                    <Stack key={key} spacing={2}>
+                      <Typography mb={2} variant="body1" fontSize={"1rem"}>
+                        <b>
+                          {user.fields.firstName} {user.fields.lastName}
+                        </b>
+                      </Typography>
+                      <RsvpToggleButton
+                        name={`${user.sys.id}.rsvpStatus`}
+                        value={values[user.sys.id].rsvpStatus}
+                        onChange={handleRsvpStatusChange}
+                      />
 
-                    {values[user.sys.id].rsvpStatus === "attending" && (
-                      <Stack spacing={4}>
-                        <DietaryRequirementsSection
-                          onChange={handleChange}
-                          user={user}
-                          values={values[user.sys.id]}
-                          setFieldValue={setFieldValue}
-                        />
-                      </Stack>
-                    )}
-                  </Stack>
-                ))}
-                <Box width="50%" alignContent="center">
-                  <Confetti ref={confettiRef}>
-                    {isSubmitted && !dirty ? (
-                      <Button
-                        color="success"
-                        variant="contained"
-                        startIcon={<DoneIcon />}
-                        type="button"
-                        fullWidth
-                      >
-                        Submitted
-                      </Button>
-                    ) : (
-                      dirty && (
-                        <LoadingButton
-                          disabled={isSubmitting}
-                          onClick={handleSubmit}
-                          type="submit"
+                      {values[user.sys.id].rsvpStatus === "attending" && (
+                        <Stack spacing={4}>
+                          <DietaryRequirementsSection
+                            onChange={handleChange}
+                            user={user}
+                            values={values[user.sys.id]}
+                            setFieldValue={setFieldValue}
+                          />
+                        </Stack>
+                      )}
+                    </Stack>
+                  ))}
+                  <Box width="50%" alignContent="center">
+                    <Confetti ref={confettiRef}>
+                      {isSubmitted && !dirty ? (
+                        <Button
+                          color="success"
                           variant="contained"
-                          size="large"
-                          startIcon={<SendIcon />}
-                          loading={isSubmitting}
-                          loadingIndicator="Submitting..."
+                          startIcon={<DoneIcon />}
+                          type="button"
                           fullWidth
                         >
-                          Submit response
-                        </LoadingButton>
-                      )
-                    )}
-                  </Confetti>
-                </Box>
-              </Stack>
-            </Form>
+                          Submitted
+                        </Button>
+                      ) : (
+                        dirty && (
+                          <LoadingButton
+                            disabled={isSubmitting}
+                            onClick={handleSubmit}
+                            type="submit"
+                            // variant="contained"
+                            size="large"
+                            startIcon={<SendIcon />}
+                            loading={isSubmitting}
+                            loadingIndicator="Submitting..."
+                            fullWidth
+                          >
+                            Submit response
+                          </LoadingButton>
+                        )
+                      )}
+                    </Confetti>
+                  </Box>
+                </Stack>
+              </Form>
+            </>
           );
         }}
       </Formik>

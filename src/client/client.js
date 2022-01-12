@@ -41,6 +41,20 @@ export const getEntryById_mgmt = async (id) => {
   return entry;
 }
 
+export const createEntry = async (contentType, fields) => {
+  const entry = await managementClient.getSpace(spaceId)
+  .then((space) => space.getEnvironment('master'))
+  .then((environment) => environment.createEntry(contentType, { fields: {
+    suggestedBy: {"en-US": {sys: {type: "Link", linkType: "Entry", id: fields.suggestedBy}}}, 
+    suggestion: { "en-US": fields.suggestion}
+  }
+  }))
+
+  await entry.publish()
+
+  return entry;
+}
+
 export const updateEntry = async (id, updateObj) => {
   const entry = await getEntryById_mgmt(id);
 
@@ -89,6 +103,31 @@ export const getMemories = async() => {
 export const getFaqs = async() => {
   const allFaqs = await getAllEntriesByType("faq", {order: "fields.order"});
   return allFaqs;
+}
+
+export const getSongSuggestionsForUser = async(userId) => {
+  const response = await getAllEntriesByType("songSuggestion", {
+  'fields.suggestedBy.sys.id': userId,
+  });
+  return response;
+}
+
+export const createSongSuggestion = async (userId, suggestion) => {
+  console.log(suggestion)
+  const response = await createEntry("songSuggestion", {suggestedBy: userId, suggestion: suggestion});
+  return response;
+}
+export const createHoneymoonSuggestion = async (userId, suggestion) => {
+  console.log(suggestion)
+  const response = await createEntry("honeymoonSuggestion", {suggestedBy: userId, suggestion: suggestion});
+  return response;
+}
+
+export const getHoneymoonSuggestionsForUser = async(userId) => {
+  const response = await getAllEntriesByType("honeymoonSuggestion", {
+  'fields.suggestedBy.sys.id': userId,
+  });
+  return response;
 }
 
 export const getValidations = async (contentType) => {

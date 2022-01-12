@@ -18,6 +18,8 @@ import { PublicLayout } from "./components/Layout/PublicLayout";
 
 const themeColors = {
   darkGrey: "#1e1e1e",
+  midGrey: "#999999",
+  // peach: "#f4d7cb",
   peach: "#ffefe6",
   peachDark: "#f3d7c8",
 };
@@ -96,23 +98,28 @@ function App() {
         styleOverrides: {
           root: {
             border: "1px solid",
-            borderColor: themeColors.darkGrey,
+            borderColor: themeColors.midGrey,
+            fontWeight: 400,
+            // borderColor: themeColors.darkGrey,
             textTransform: "none",
             color: themeColors.darkGrey,
 
             "&.Mui-selected": {
               "&:hover": {
-                borderColor: themeColors.darkGrey,
+                borderColor: themeColors.midGrey,
+                // borderColor: themeColors.darkGrey,
                 backgroundColor: themeColors.peach,
               },
               backgroundColor: themeColors.peach,
+              fontWeight: 500,
             },
             "&.MuiToggleButtonGroup-grouped:not(:first-of-type)": {
               border: "1px solid",
-              borderColor: themeColors.darkGrey,
+              // borderColor: themeColors.darkGrey,
+              borderColor: themeColors.midGrey,
             },
             "&:hover": {
-              borderColor: themeColors.darkGrey,
+              borderColor: themeColors.midGrey,
               backgroundColor: themeColors.peach,
             },
           },
@@ -123,7 +130,7 @@ function App() {
           root: {
             textTransform: "none",
             // letterSpacing: 1,
-            fontWeight: 400,
+            // fontWeight: 400,
             color: themeColors.darkGrey,
             whiteSpace: "nowrap",
             minWidth: "max-content",
@@ -166,9 +173,9 @@ function App() {
     typography: {
       fontFamily: ["Montserrat, sans-serif"],
       h1: {
-        fontFamily: ["Bayshore", "GFS Didot", "serif"].join(","),
-        fontSize: "5rem",
-        letterSpacing: 0.5,
+        fontFamily: ["Montserrat", "serif"].join(","),
+        fontSize: "3rem",
+        // letterSpacing: 0.5,
       },
       h4: { fontFamily: ["GFS Didot", "serif"].join(",") },
       body1: {
