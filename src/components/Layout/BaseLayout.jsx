@@ -5,15 +5,15 @@ import { Header } from "../MainMenu/MainMenu";
 import { Container } from "@mui/material";
 
 export const BaseLayout = ({ title, displayPageTitle = true, children }) => (
-  <Container>
+  <>
     <Header />
-    <Container sx={{ textAlign: "center", py: 10 }}>
+    <Container sx={{ textAlign: "center", py: 6 }}>
       {displayPageTitle && (
-        <Typography variant="h1" sx={{ mb: 10 }}>
+        <Typography variant="h1" sx={{ mb: 6 }}>
           {title}
         </Typography>
       )}
       {children}
     </Container>
-  </Container>
+  </>
 );
