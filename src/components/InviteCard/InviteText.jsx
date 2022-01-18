@@ -59,56 +59,46 @@ export const InviteText = () => (
                 Together with their families
               </tspan>
             </text>
-            <text
-              id="Michelle"
-              font-family="Bayshore"
-              font-size="90"
-              letter-spacing="1"
-            >
-              <tspan x="197.512692" y="142">
-                Michelle
-              </tspan>
-            </text>
-            <text
-              id="&amp;"
-              font-family="Bayshore"
-              font-size="70"
-              letter-spacing="1"
-            >
-              <tspan x="291.020192" y="286">
-                &amp;
-              </tspan>
-            </text>
-            <text
-              id="Christian"
-              font-family="Bayshore"
-              font-size="90"
-              letter-spacing="1"
-            >
-              <tspan x="185.838654" y="373">
-                Christian
-              </tspan>
-            </text>
-            <text
-              id="Tandjung"
-              font-family="Bayshore"
-              font-size="55"
-              letter-spacing="1"
-            >
-              <tspan x="239.778333" y="195">
-                Tandjung
-              </tspan>
-            </text>
-            <text
-              id="Hrdina"
-              font-family="Bayshore"
-              font-size="55"
-              letter-spacing="1"
-            >
-              <tspan x="253.852692" y="421">
-                Hrdina
-              </tspan>
-            </text>
+
+            <g font-family="Bacalisties">
+              <text id="Michelle" font-size="90">
+                <tspan x="197.512692" y="142">
+                  Michelle
+                </tspan>
+              </text>
+              <text id="&amp;" font-size="70">
+                <tspan x="291.020192" y="286">
+                  &amp;
+                </tspan>
+              </text>
+              <text
+                id="Christian"
+                // font-family="Bacalisties"
+                font-size="90"
+              >
+                <tspan x="185.838654" y="373">
+                  Christian
+                </tspan>
+              </text>
+              <text
+                id="Tandjung"
+                // font-family="Bacalisties"
+                font-size="55"
+              >
+                <tspan x="239.778333" y="195">
+                  Tandjung
+                </tspan>
+              </text>
+              <text
+                id="Hrdina"
+                // font-family="Bayshore"
+                font-size="55"
+              >
+                <tspan x="253.852692" y="421">
+                  Hrdina
+                </tspan>
+              </text>
+            </g>
           </g>
         </g>
       </g>

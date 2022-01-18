@@ -10,6 +10,7 @@ import ChildCareOutlinedIcon from "@mui/icons-material/ChildCareOutlined";
 import CheckroomOutlinedIcon from "@mui/icons-material/CheckroomOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import DirectionsCarOutlinedIcon from "@mui/icons-material/DirectionsCarOutlined";
+import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 import { getAllEntriesByType, getFaqs } from "../client/client";
 import { useEffect, useState } from "react";
 import { Stack } from "@mui/material";
@@ -25,6 +26,7 @@ const iconsRecord = {
   CheckroomOutlined: CheckroomOutlinedIcon,
   AccessTimeOutlined: AccessTimeOutlinedIcon,
   DirectionsCarOutlined: DirectionsCarOutlinedIcon,
+  LiveTvOutlined: LiveTvOutlinedIcon,
 };
 
 export const Faq = ({ icon, question, answer }) => {
@@ -32,7 +34,7 @@ export const Faq = ({ icon, question, answer }) => {
 
   return (
     <>
-      <Stack textAlign="center">
+      <Stack textAlign="center" maxWidth="600px">
         <Box style={{ flex: 1, justifyContent: "center" }}>
           {iconComponent && <Icon component={iconComponent} />}
         </Box>
@@ -61,10 +63,7 @@ const Faqs = () => {
 
   return (
     <>
-      <Typography variant="h1" mb={4}>
-        Q & A
-      </Typography>
-      <Stack mt={1} spacing={6}>
+      <Stack mt={1} spacing={6} sx={{ alignItems: "center" }} width="100%">
         {faqs?.map((data) => (
           <Faq {...data} />
         ))}

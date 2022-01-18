@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useContext, useMemo, useState, useEffect } from "react";
@@ -46,20 +46,17 @@ const Rsvp = () => {
   }
 
   return (
-    <>
-      <Typography variant="h1" sx={{ mb: 4 }}>
-        RSVP
-      </Typography>
-      <Box
-        textAlign="left"
-        // pt={5}
-        sx={{ display: "flex", justifyContent: "center", whiteSpace: "nowrap" }}
-      >
-        {(householdUsers || user) && (
-          <RsvpForm users={householdUsers || [user]} />
-        )}
-      </Box>
-    </>
+    // <Box
+    //   textAlign="left"
+    //   sx={{ display: "flex", justifyContent: "center", whiteSpace: "nowrap" }}
+    // >
+    <Container maxWidth="sm" sx={{ textAlign: "left" }}>
+      {(householdUsers || user) && (
+        <RsvpForm users={householdUsers || [user]} />
+      )}
+    </Container>
+
+    // </Box>
   );
 };
 

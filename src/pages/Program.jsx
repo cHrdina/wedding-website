@@ -33,7 +33,9 @@ const events = [
 const Program = () => {
   return (
     <Box textAlign="center">
-      <Typography variant="h1">Sat, 5 March</Typography>
+      <Typography fontWeight="600" variant="h5">
+        Saturday, 5 March
+      </Typography>
       <Box
         sx={{
           display: "flex",

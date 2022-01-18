@@ -22,7 +22,7 @@ export const Header = () => {
     <AppBar
       elevation={0}
       position="static"
-      sx={{ bgcolor: "background.paper", color: "text.primary" }}
+      sx={{ bgcolor: "background.default", color: "text.primary" }}
     >
       <Container maxWidth="xl">
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -32,7 +32,7 @@ export const Header = () => {
             component="div"
             sx={{ pr: 2, display: "flex" }}
           >
-            M{" & "}C
+            m{" + "}c
           </Typography>
           {isMobile ? (
             <MobileMenu />
@@ -51,9 +51,6 @@ export const Header = () => {
                         }}
                         variant="body1"
                         key={key}
-                        // className={`${
-                        //   pathname === route ? " link-active" : ""
-                        // }`}
                         href={route}
                       >
                         {name}

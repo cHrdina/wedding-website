@@ -14,12 +14,8 @@ export const RsvpToggleButton = ({ name, value, onChange }) => {
       value={value}
       size="large"
     >
-      <ToggleButton value="attending" sx={{ paddingX: 4 }}>
-        Yes, I'll be there
-      </ToggleButton>
-      <ToggleButton value="not_attending" sx={{ paddingX: 4 }}>
-        No, I can't attend
-      </ToggleButton>
+      <ToggleButton value="attending">Yes, I'll be there</ToggleButton>
+      <ToggleButton value="not_attending">No, I can't attend</ToggleButton>
     </ToggleButtonGroup>
   );
 };

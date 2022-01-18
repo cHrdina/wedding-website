@@ -12,21 +12,23 @@ const confettiColors = [
   "#B76E79",
 ];
 
-const config = {
+const defaultConfig = {
   lifetime: 82,
   angle: 90,
-  decay: 0.93,
-  spread: 87,
-  startVelocity: 27,
-  elementCount: 90,
+  decay: 0.94,
+  spread: 295,
+  startVelocity: 28,
+  elementCount: 300,
   elementSize: 7,
   colors: confettiColors,
 };
 
-export const Confetti = forwardRef(({ children, type = "confetti" }, ref) => (
-  <Box width="100%">
-    <Reward type={type} ref={ref} config={config}>
-      {children}
-    </Reward>
-  </Box>
-));
+export const Confetti = forwardRef(
+  ({ children, type = "confetti", config = defaultConfig }, ref) => (
+    <div sx={{ textAlign: "center", height: "10px" }}>
+      <Reward type={type} ref={ref} config={config}>
+        <div>{children}</div>
+      </Reward>
+    </div>
+  )
+);

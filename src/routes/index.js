@@ -9,32 +9,33 @@ import Faqs from "../pages/Faqs";
 
 export const mainMenuRoutes = [
   {
-    name: "Home",
+    name: "home",
     route: "/",
     component: Home,
+    displayPageTitle: false
   },
   {
-    name: "Wedding Program",
+    name: "wedding program",
     route: "/program",
     component: Program,
   },
   {
-    name: "Our Story",
+    name: "our story",
     route: "/our-story",
     component: OurStory,
   },
   {
-    name: "RSVP",
+    name: "rsvp",
     route: "/rsvp",
     component: Rsvp,
   },
   {
-    name: "Recommendations",
+    name: "recommendations",
     route: "/recommend",
     component: Recommendations,
   },
   {
-    name: "Q & A",
+    name: "q + a",
     route: "/qanda",
     component: Faqs,
   },

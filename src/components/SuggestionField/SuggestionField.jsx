@@ -12,6 +12,8 @@ import {
   Avatar,
   TextField,
   ListItemIcon,
+  InputAdornment,
+  Button,
 } from "@mui/material";
 
 const SuggestionsList = ({ suggestions, handleRemove, icon }) => {
@@ -53,6 +55,13 @@ export const SuggestionField = ({
     setInputValue(e.target.value);
   };
 
+  const handleAddButtonClick = (input) => {
+    const trimmedInputValue = input?.trim();
+
+    handleAdd(name, trimmedInputValue);
+    setInputValue("");
+  };
+
   const handleKeyPress = (e) => {
     const trimmedInputValue = e.target.value.trim();
 
@@ -74,6 +83,18 @@ export const SuggestionField = ({
         onChange={handleChange}
         fullWidth
         variant="standard"
+        InputProps={{
+          endAdornment: inputValue && (
+            <InputAdornment position="end">
+              <Button
+                variant="text"
+                onClick={() => handleAddButtonClick(inputValue)}
+              >
+                + Add
+              </Button>
+            </InputAdornment>
+          ),
+        }}
       />
       <SuggestionsList
         suggestions={suggestions}

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=GFS+Didot&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Spartan:wght@200;300;400;500;600;700&display=swap');
 
 @font-face {
   font-family: "Bayshore";
@@ -6,6 +6,14 @@
   font-weight: normal;
   src: local("Bayshore"), url('../fonts/bayshore.otf') format('opentype');
 }
+@font-face {
+  font-family: "Bacalisties";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Bacalisties"), url('../fonts/Bacalisties.ttf') format('truetype');
+}
+
+
 
 .login-container {
   color: #fff;
@@ -20,6 +28,12 @@
 .link-active {
   border-bottom: 1px solid black;
 }
+
+
+.absolute-player {
+  z-index: -1;
+}
+
 
 
 /* For Hamburger animation */

@@ -33,7 +33,6 @@ const OurStory = () => {
 
   return (
     <Box>
-      <Typography variant="h1">Our Story</Typography>
       {mobile ? (
         <StoryTimelineMobile memories={memories} />
       ) : (

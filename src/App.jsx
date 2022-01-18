@@ -21,10 +21,15 @@ const themeColors = {
   midGrey: "#999999",
   // peach: "#f4d7cb",
   peach: "#ffefe6",
-  peachDark: "#f3d7c8",
+  // peachDark: "#f3d7c8",
 };
 
-const PrivateRoute = ({ component: Component, name, ...rest }) => {
+const PrivateRoute = ({
+  component: Component,
+  name,
+  displayPageTitle,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
@@ -39,7 +44,7 @@ const PrivateRoute = ({ component: Component, name, ...rest }) => {
         }
 
         return (
-          <BaseLayout title={name}>
+          <BaseLayout title={name} displayPageTitle={displayPageTitle}>
             <Component {...props} />
           </BaseLayout>
         );
@@ -54,7 +59,7 @@ function App() {
       CssBaseline: {
         "@global": {
           html: {
-            fontFamily: "Montserrat",
+            fontFamily: "Spartan",
             fontWeight: 400,
             // letterSpacing: 1,
             color: themeColors.darkGrey,
@@ -73,7 +78,7 @@ function App() {
       MuiInput: {
         styleOverrides: {
           root: {
-            fontSize: "1.5rem",
+            fontSize: "1rem",
           },
           underline: {
             "&::after": {
@@ -98,6 +103,7 @@ function App() {
         styleOverrides: {
           root: {
             border: "1px solid",
+            borderRadius: 0,
             borderColor: themeColors.midGrey,
             fontWeight: 400,
             // borderColor: themeColors.darkGrey,
@@ -123,6 +129,9 @@ function App() {
               backgroundColor: themeColors.peach,
             },
           },
+          sizeLarge: {
+            padding: "0.8rem 2rem",
+          },
         },
       },
       MuiButton: {
@@ -135,57 +144,62 @@ function App() {
             whiteSpace: "nowrap",
             minWidth: "max-content",
             backgroundColor: themeColors.peach,
+            borderRadius: 0,
             "&:hover": {
-              borderColor: themeColors.darkGrey,
+              borderColor: themeColors.midGrey,
               backgroundColor: "#f3d7c8",
             },
           },
-          outlined: {
-            borderColor: themeColors.darkGrey,
-          },
+          // outlined: {
+          //   borderColor: themeColors.midGrey,
+          // },
           outlinedPrimary: {
-            borderColor: themeColors.darkGrey,
+            borderColor: themeColors.midGrey,
             // border: "0.5px solid",
+          },
+          sizeLarge: {
+            padding: "0.8rem 2rem",
           },
         },
       },
     },
-    pallete: {
+    palette: {
       default: {
-        color: themeColors.peach,
+        color: themeColors.darkGrey,
       },
       primary: {
         color: themeColors.darkGrey,
-        main: themeColors.peach,
+        main: themeColors.darkGrey,
       },
       text: {
-        primary: {
-          color: themeColors.darkGrey,
-        },
+        primary: themeColors.darkGrey,
       },
       action: {
         hover: themeColors.peach,
       },
+      background: {
+        default: themeColors.peach,
+      },
     },
-    background: {
-      default: "#fff",
-    },
+
     typography: {
-      fontFamily: ["Montserrat, sans-serif"],
+      fontFamily: ["Spartan, sans-serif"],
       h1: {
-        fontFamily: ["Montserrat", "serif"].join(","),
-        fontSize: "3rem",
+        fontFamily: ["Bacalisties", "serif"].join(","),
+        fontSize: "4rem",
         // letterSpacing: 0.5,
       },
-      h4: { fontFamily: ["GFS Didot", "serif"].join(",") },
+      h4: { fontFamily: ["Spartan", "serif"].join(",") },
       body1: {
-        fontFamily: ["Montserrat", "sans-serif"].join(","),
+        fontFamily: ["Spartan", "sans-serif"].join(","),
       },
       subtitle1: {
-        fontFamily: ["Montserrat", "sans-serif"].join(","),
+        fontFamily: ["Spartan", "sans-serif"].join(","),
       },
       logo: {
-        fontFamily: ["Bayshore", "sans-serif"].join(","),
+        color: themeColors.darkGrey,
+        fontFamily: ["Bacalisties", "sans-serif"].join(","),
+        fontWeight: "bold",
         fontSize: "3rem",
       },
     },
@@ -207,14 +221,17 @@ function App() {
                 <Login />
               </PublicLayout>
             </Route>
-            {mainMenuRoutes.map(({ route, name, component }) => (
-              <PrivateRoute
-                exact
-                path={route}
-                name={name}
-                component={component}
-              />
-            ))}
+            {mainMenuRoutes.map(
+              ({ route, name, displayPageTitle, component }) => (
+                <PrivateRoute
+                  exact
+                  path={route}
+                  name={name}
+                  component={component}
+                  displayPageTitle={displayPageTitle}
+                />
+              )
+            )}
           </Switch>
         </ThemeProvider>
       </AuthHandler>

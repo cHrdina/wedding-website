@@ -27,11 +27,8 @@ export const RsvpForm = ({ users, onSubmit }) => {
   const { updateUser } = useContext(AuthContext);
   const [isSubmitted, setSubmitted] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
 
   const confettiRef = useRef(null);
-
-  const history = useHistory();
 
   const initialValues = useMemo(() => {
     return users.reduce((o, user) => {
@@ -51,15 +48,13 @@ export const RsvpForm = ({ users, onSubmit }) => {
   }, [users]);
 
   return (
-    <Stack spacing={4}>
-      <Box>
-        <Typography variant="h5" mb={1}>
-          Will you be attending our wedding in Palm Beach?
-        </Typography>
+    <Box>
+      <Stack spacing={2} mb={4}>
+        <Typography variant="h5">Will you be attending our wedding?</Typography>
         <Typography variant="subtitle1">
-          Please respond by Saturday, 5 February 2022
+          Please respond by Friday, 11 February 2022
         </Typography>
-      </Box>
+      </Stack>
 
       <Formik
         initialValues={initialValues}
@@ -92,7 +87,6 @@ export const RsvpForm = ({ users, onSubmit }) => {
             confettiRef?.current?.rewardMe();
 
             // await sleep(3000);
-            // history.push("/program");
           } catch (e) {
             throw e;
           }
@@ -101,29 +95,26 @@ export const RsvpForm = ({ users, onSubmit }) => {
           });
         }}
       >
-        {({
-          handleSubmit,
-          handleChange,
-          onChange,
-          values,
-          dirty,
-          setFieldValue,
-        }) => {
+        {({ handleSubmit, handleChange, values, dirty, setFieldValue }) => {
           const handleRsvpStatusChange = (fieldName, rsvpStatus) => {
             setFieldValue(fieldName, rsvpStatus);
           };
 
           return (
-            <>
-              <Form>
-                <Stack spacing={4} mb={4} divider={<Divider />}>
-                  {users.map((user, key) => (
-                    <Stack key={key} spacing={2}>
-                      <Typography mb={2} variant="body1" fontSize={"1rem"}>
-                        <b>
-                          {user.fields.firstName} {user.fields.lastName}
-                        </b>
-                      </Typography>
+            <Form>
+              <Stack
+                spacing={6}
+
+                // divider={<Divider />}
+              >
+                {users.map((user, key) => (
+                  <Stack spacing={2}>
+                    <Typography variant="body1" fontSize={"1rem"}>
+                      <b>
+                        {user.fields.firstName} {user.fields.lastName}
+                      </b>
+                    </Typography>
+                    <Stack key={key} spacing={1}>
                       <RsvpToggleButton
                         name={`${user.sys.id}.rsvpStatus`}
                         value={values[user.sys.id].rsvpStatus}
@@ -141,44 +132,43 @@ export const RsvpForm = ({ users, onSubmit }) => {
                         </Stack>
                       )}
                     </Stack>
-                  ))}
-                  <Box width="50%" alignContent="center">
-                    <Confetti ref={confettiRef}>
-                      {isSubmitted && !dirty ? (
-                        <Button
-                          color="success"
-                          variant="contained"
-                          startIcon={<DoneIcon />}
-                          type="button"
-                          fullWidth
+                  </Stack>
+                ))}
+                <Box width="max-content" textAlign={"center"}>
+                  <Confetti ref={confettiRef}>
+                    {isSubmitted && !dirty ? (
+                      <Button
+                        color="success"
+                        variant="outlined"
+                        startIcon={<DoneIcon />}
+                        type="button"
+                        size="large"
+                      >
+                        Submitted
+                      </Button>
+                    ) : (
+                      dirty && (
+                        <LoadingButton
+                          disabled={isSubmitting}
+                          onClick={handleSubmit}
+                          type="submit"
+                          variant="outlined"
+                          size="large"
+                          startIcon={<SendIcon />}
+                          loading={isSubmitting}
+                          loadingIndicator="Submitting..."
                         >
-                          Submitted
-                        </Button>
-                      ) : (
-                        dirty && (
-                          <LoadingButton
-                            disabled={isSubmitting}
-                            onClick={handleSubmit}
-                            type="submit"
-                            // variant="contained"
-                            size="large"
-                            startIcon={<SendIcon />}
-                            loading={isSubmitting}
-                            loadingIndicator="Submitting..."
-                            fullWidth
-                          >
-                            Submit response
-                          </LoadingButton>
-                        )
-                      )}
-                    </Confetti>
-                  </Box>
-                </Stack>
-              </Form>
-            </>
+                          Submit response
+                        </LoadingButton>
+                      )
+                    )}
+                  </Confetti>
+                </Box>
+              </Stack>
+            </Form>
           );
         }}
       </Formik>
-    </Stack>
+    </Box>
   );
 };
