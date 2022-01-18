@@ -39,15 +39,9 @@ export const MobileMenu = () => {
                 >
                   <MenuItem
                     selected={isActiveRoute(route)}
-                    sx={{ textAlign: "center" }}
+                    sx={{ textAlign: "center", py: 4 }}
                   >
-                    <ListItemText
-                      primary={name}
-                      primaryTypographyProps={{
-                        fontFamily: "Montserrat",
-                        fontSize: "5vh",
-                      }}
-                    />
+                    <ListItemText primary={name} />
                   </MenuItem>
                 </Link>
               ))}
