@@ -7,7 +7,7 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
-  // Link,
+  Link as MuiLink,
   Box,
   Grid,
   Container,
@@ -46,20 +46,18 @@ export const Header = () => {
                   .filter((route) => !route.isPublic)
                   .map(({ name, route }, key) => (
                     <Grid item key={key}>
-                      <Link key={key} to={route}>
-                        {name}
-                      </Link>
-                      {/* <Link
+                      <MuiLink
                         sx={{
                           color: "text.primary",
                           textDecoration: "none",
                           fontWeight: pathname === route ? 600 : 400,
                         }}
                         variant="body1"
-                        href={route}
+                        component={Link}
+                        to={route}
                       >
                         {name}
-                      </Link> */}
+                      </MuiLink>
                     </Grid>
                   ))}
               </Grid>
