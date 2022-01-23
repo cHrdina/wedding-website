@@ -32,6 +32,8 @@ const OurStory = () => {
     getAllMemories();
   }, []);
 
+  if (!memories) return <>Loading...</>;
+
   return (
     <Box>
       {mobile ? (

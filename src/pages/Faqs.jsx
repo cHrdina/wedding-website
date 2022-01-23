@@ -60,6 +60,8 @@ const Faqs = () => {
     getAllFaqs();
   }, []);
 
+  if (!faqs) return <>Loading...</>;
+
   return (
     <>
       <Stack mt={1} spacing={6} sx={{ alignItems: "center" }} width="100%">

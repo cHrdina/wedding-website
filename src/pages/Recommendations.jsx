@@ -17,6 +17,8 @@ import { AuthContext } from "../handlers/AuthHandler";
 const Recommendations = () => {
   const { user } = useContext(AuthContext);
 
+  if (!user) return <>Loading...</>;
+
   const confettiRef = useRef(null);
 
   const onSubmit = async (values, { resetForm, setSubmitting, setStatus }) => {
