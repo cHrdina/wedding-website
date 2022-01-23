@@ -72,6 +72,7 @@ const Recommendations = () => {
             <Form onSubmit={handleSubmit}>
               <Stack mb={2} spacing={6} sx={{ textAlign: "left" }}>
                 <Stack spacing={2}>
+                  <Typography sx={{ fontWeight: "bold" }}>Music</Typography>
                   <Typography textAlign="left" variant="body1">
                     What would get you up and dancing?
                   </Typography>
@@ -85,6 +86,9 @@ const Recommendations = () => {
                   />
                 </Stack>
                 <Stack spacing={2}>
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    Honeymoon destinations
+                  </Typography>
                   <Typography textAlign="left" variant="body1">
                     Where should we go? Name your favorite place that
                     you&apos;ve explored.
