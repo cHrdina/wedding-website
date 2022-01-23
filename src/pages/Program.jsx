@@ -24,7 +24,7 @@ const events = [
     time: "7:30 pm",
   },
   {
-    title: "Pool party",
+    title: "Celebrations conclude",
     time: "11 pm",
   },
 ];
@@ -32,7 +32,7 @@ const events = [
 const Program = () => {
   return (
     <Box textAlign="center">
-      <Typography variant="h5">Saturday, 5 March</Typography>
+      <Typography variant="body1">Saturday, 5 March</Typography>
       <Box
         sx={{
           display: "flex",

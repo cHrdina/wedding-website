@@ -13,7 +13,7 @@ export const ProgramTimeline = ({ events }) => {
     <>
       <MuiTimeline sx={{ width: "50vw" }}>
         {events.map(({ title, time }, index) => (
-          <TimelineItem key={index} sx={{ minHeight: "2.5rem" }}>
+          <TimelineItem key={index} sx={{ minHeight: "3.5rem" }}>
             <TimelineOppositeContent sx={{ position: "relative" }}>
               <Typography
                 variant="body1"
@@ -21,7 +21,7 @@ export const ProgramTimeline = ({ events }) => {
                   position: "absolute",
                   top: "-0.2rem",
                   right: 0,
-                  lineHeight: "1",
+                  lineHeight: "1.25",
                 }}
               >
                 {time}
@@ -53,7 +53,7 @@ export const ProgramTimeline = ({ events }) => {
                   position: "absolute",
                   top: "-0.2rem",
                   left: 0,
-                  lineHeight: "1",
+                  lineHeight: "1.25",
                 }}
               >
                 {title}
