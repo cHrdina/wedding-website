@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   Checkbox,
   FormControlLabel,
@@ -6,9 +8,8 @@ import {
   TextField,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { getContentTypeById } from "../../client/client";
-import CheckIcon from "@mui/icons-material/Check";
 import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 
 export const DietaryRequirementsSection = ({
@@ -24,8 +25,6 @@ export const DietaryRequirementsSection = ({
 
   const getAvailableOptions = async () => {
     const userContentType = await getContentTypeById("user");
-
-    console.log(userContentType.fields);
 
     const validations = userContentType.fields.find(({ id }) => {
       return id === "dietaryRequirements";

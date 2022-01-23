@@ -1,5 +1,4 @@
-import { Box } from "@mui/material";
-import React, { useRef, forwardRef } from "react";
+import React, { forwardRef } from "react";
 
 import Reward from "react-rewards";
 

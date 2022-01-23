@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { Form, useFormik } from "formik";
+import { useFormik } from "formik";
 
-import { Input, InputLabel, Stack, Typography, Box } from "@mui/material";
-import { FormControl, TextField } from "@mui/material";
+import { Stack, Typography, Box } from "@mui/material";
+import { TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 import * as Yup from "yup";
@@ -19,29 +19,26 @@ const PasswordValidationSchema = Yup.object().shape({
     .required("Required"),
 });
 
-export const LoginForm = ({ onSubmit, withUsername }) => {
+export const LoginForm = ({ onSubmit }) => {
   const {
     handleSubmit,
     handleChange,
-    onChange,
     values,
     isSubmitting,
     errors,
-    vali,
+    setFieldError,
   } = useFormik({
     validationSchema: PasswordValidationSchema,
     initialValues: {
       username: "",
       password: "",
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
       try {
-        onSubmit(values);
-      } catch (e) {}
-    },
-    onChange: (values) => {
-      console.log(values.password);
+        await onSubmit(values);
+      } catch (e) {
+        setFieldError("password", e.message);
+      }
     },
     validateOnBlur: false,
     validateOnChange: false,
@@ -51,25 +48,12 @@ export const LoginForm = ({ onSubmit, withUsername }) => {
     <form>
       <Stack spacing={4} alignItems="center">
         <Stack spacing={2}>
-          {/* {withUsername && (
-            <TextField
-              size="medium"
-              value={values.username}
-              onChange={handleChange}
-              label="Username"
-              name="username"
-              type="text"
-              variant="standard"
-            />
-          )} */}
-
-          <Typography fontSize="2rem">Enter your password</Typography>
+          <Typography variant="h5">Enter your password</Typography>
           <TextField
             size="medium"
             value={values.password}
             onChange={handleChange}
             label=""
-            className="password-input"
             name="password"
             variant="standard"
             autoFocus
@@ -86,10 +70,10 @@ export const LoginForm = ({ onSubmit, withUsername }) => {
           loadingIndicator={<LoadingIndicator />}
           sx={{
             textTransform: "none",
-            px: 10,
+            px: 13,
           }}
         >
-          let's go
+          let&aposs go
         </LoadingButton>
       </Stack>
     </form>

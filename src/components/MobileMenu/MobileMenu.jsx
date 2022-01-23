@@ -1,17 +1,13 @@
-import React, { useState } from "react";
-
-import { styled, useTheme } from "@mui/styles";
-import { Drawer, IconButton, Box, Link } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-
-import { mainMenuRoutes } from "../../routes";
-import { ListItemText, MenuItem, MenuList } from "@mui/material";
+import React from "react";
 import { useToggle } from "../../hooks/useToggle";
 
+import { mainMenuRoutes } from "../../routes";
+import MenuIcon from "@mui/icons-material/MenuOutlined";
+import { Drawer, IconButton, Box, Link } from "@mui/material";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { ListItemText, MenuItem, MenuList } from "@mui/material";
+
 export const MobileMenu = () => {
-  const theme = useTheme();
   const [isOpen, toggleIsOpen] = useToggle();
 
   const isActiveRoute = (route) => {

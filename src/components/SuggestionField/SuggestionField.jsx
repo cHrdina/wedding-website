@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 
 import {
   List,
   ListItem,
   ListItemText,
   IconButton,
-  ListItemAvatar,
-  Avatar,
   TextField,
   ListItemIcon,
   InputAdornment,
@@ -41,7 +38,6 @@ const SuggestionsList = ({ suggestions, handleRemove, icon }) => {
 };
 
 export const SuggestionField = ({
-  onRemove,
   name,
   suggestions,
   label = "Suggestion",
@@ -67,7 +63,6 @@ export const SuggestionField = ({
 
     if (e.key === "Enter" && inputValue) {
       e.preventDefault();
-      console.log("adding", trimmedInputValue);
       handleAdd(name, trimmedInputValue);
       setInputValue("");
     }

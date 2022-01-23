@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   AppBar,
   Toolbar,
@@ -42,7 +44,7 @@ export const Header = () => {
                 {mainMenuRoutes
                   .filter((route) => !route.isPublic)
                   .map(({ name, route }, key) => (
-                    <Grid item>
+                    <Grid item key={key}>
                       <Link
                         sx={{
                           color: "text.primary",
@@ -50,7 +52,6 @@ export const Header = () => {
                           fontWeight: pathname === route ? 600 : 400,
                         }}
                         variant="body1"
-                        key={key}
                         href={route}
                       >
                         {name}

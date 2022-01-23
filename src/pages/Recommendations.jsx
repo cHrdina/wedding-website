@@ -1,19 +1,18 @@
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
-import { SuggestionField } from "../components/SuggestionField/SuggestionField";
+import React from "react";
 
-import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
-import {
-  createSongSuggestion,
-  createHoneymoonSuggestion,
-  getHoneymoonSuggestionsForUser,
-  getSongSuggestionsForUser,
-} from "../client/client";
-import { AuthContext } from "../handlers/AuthHandler";
-import { Form, Formik } from "formik";
+import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import { LoadingButton } from "@mui/lab";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Form, Formik } from "formik";
+import { useContext, useRef } from "react";
+import {
+  createHoneymoonSuggestion,
+  createSongSuggestion,
+} from "../client/client";
 import { Confetti } from "../components/Confetti/Confetti";
+import { SuggestionField } from "../components/SuggestionField/SuggestionField";
+import { AuthContext } from "../handlers/AuthHandler";
 
 const Recommendations = () => {
   const { user } = useContext(AuthContext);
@@ -21,7 +20,6 @@ const Recommendations = () => {
   const confettiRef = useRef(null);
 
   const onSubmit = async (values, { resetForm, setSubmitting, setStatus }) => {
-    // console.log(values);
     setSubmitting(true);
     await Promise.all(
       values.songSuggestions.map(async (suggestion) => {
@@ -45,13 +43,8 @@ const Recommendations = () => {
   };
 
   return (
-    <Container maxWidth="sm" textAlign="center">
-      {/* <Box sx={{ display: "flex", justifyContent: "center", mx: 2 }}> */}
-      <Typography textAlign="left" variant="body1">
-        We would love to hear from you!
-      </Typography>
+    <Container maxWidth="sm" textAlign="left">
       <Formik
-        // enableReinitialize
         initialValues={{
           songSuggestions: [],
           honeymoonSuggestions: [],
@@ -60,8 +53,6 @@ const Recommendations = () => {
       >
         {({
           handleSubmit,
-          handleChange,
-          onChange,
           values,
           dirty,
           isSubmitting,
@@ -79,12 +70,9 @@ const Recommendations = () => {
 
           return (
             <Form onSubmit={handleSubmit}>
-              <Stack my={4} spacing={4} sx={{ textAlign: "left" }}>
+              <Stack mb={2} spacing={6} sx={{ textAlign: "left" }}>
                 <Stack spacing={2}>
-                  <Typography variant="body1">
-                    <b>Music</b>
-                  </Typography>
-                  <Typography variant="body1">
+                  <Typography textAlign="left" variant="body1">
                     What would get you up and dancing?
                   </Typography>
                   <SuggestionField
@@ -97,11 +85,8 @@ const Recommendations = () => {
                   />
                 </Stack>
                 <Stack spacing={2}>
-                  <Typography variant="body1">
-                    <b>Honeymoon destinations</b>
-                  </Typography>
-                  <Typography variant="body1">
-                    Where should we go? Name your favorite place that you've
+                  <Typography textAlign="left" variant="body1">
+                    Where should we go? Name your favorite place that you&aposve
                     explored.
                   </Typography>
                   <SuggestionField
@@ -116,13 +101,7 @@ const Recommendations = () => {
                 <Box width="max-content" textAlign={"center"}>
                   <Confetti ref={confettiRef} type="memphis">
                     {status?.success && !dirty ? (
-                      <Button
-                        color="success"
-                        variant="outlined"
-                        size="large"
-                        // startIcon={<DoneIcon />}
-                        type="button"
-                      >
+                      <Button variant="outlined" size="large" type="button">
                         Submitted
                       </Button>
                     ) : (
@@ -132,7 +111,6 @@ const Recommendations = () => {
                           type="submit"
                           variant="outlined"
                           size="large"
-                          // startIcon={<SendIcon />}
                           loading={isSubmitting}
                           loadingIndicator="Submitting..."
                         >
@@ -148,7 +126,6 @@ const Recommendations = () => {
         }}
       </Formik>
     </Container>
-    // </Box>
   );
 };
 

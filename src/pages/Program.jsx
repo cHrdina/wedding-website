@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-
 import { Box, Typography } from "@mui/material";
+import React from "react";
 import { ProgramTimeline } from "../components/ProgramTimeline/ProgramTimeline";
 
 const events = [
@@ -33,14 +32,13 @@ const events = [
 const Program = () => {
   return (
     <Box textAlign="center">
-      <Typography fontWeight="600" variant="h5">
-        Saturday, 5 March
-      </Typography>
+      <Typography variant="h5">Saturday, 5 March</Typography>
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           pr: "5%",
+          mt: 2,
         }}
       >
         <ProgramTimeline events={events} />

@@ -1,6 +1,6 @@
-import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 import React from "react";
-import { Header } from "../MainMenu/MainMenu";
+
+import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 
 export const PublicLayout = ({ children }) => (
   <Box
@@ -22,11 +22,21 @@ export const PublicLayout = ({ children }) => (
           component="div"
           sx={{ p: 2, display: "flex" }}
         >
-          M{" & "}C
+          m{" + "}c
         </Typography>
       </Toolbar>
     </AppBar>
-    <Container disableGutters sx={{ display: "flex", flex: 1, pb: 20 }}>
+    <Container
+      disableGutters
+      sx={{
+        textAlign: "center",
+        display: "flex",
+        justifyContent: "center",
+        flex: 1,
+        pb: 20,
+        mt: 4,
+      }}
+    >
       {children}
     </Container>
   </Box>

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSpring, animated } from "react-spring";
+import React from "react";
+import { animated } from "react-spring";
 
 import { useAnimatedPath } from "../../hooks/useAnimatedPath";
 

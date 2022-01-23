@@ -7,14 +7,10 @@ import { AuthContext } from "../handlers/AuthHandler";
 
 export const Login = () => {
   const { id: paramsUserId } = useParams();
-  const { loginUser, loginUserWithId } = useContext(AuthContext);
+  const { loginUserWithId } = useContext(AuthContext);
 
-  const handleLogin = async ({ username, password }) => {
-    if (paramsUserId) {
-      await loginUserWithId(paramsUserId, password);
-    } else {
-      await loginUser(username, password);
-    }
+  const handleLogin = async ({ password }) => {
+    await loginUserWithId(paramsUserId, password);
   };
 
   return (

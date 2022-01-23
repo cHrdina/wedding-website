@@ -1,14 +1,12 @@
-import React from "react";
 import MuiTimeline from "@mui/lab/Timeline";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
-import { Box, Typography } from "@mui/material";
-import { format, formatISO } from "date-fns";
-import { Stack } from "@mui/material";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import { Box, Stack, Typography } from "@mui/material";
+import { format } from "date-fns";
+import React from "react";
 
 const StoryContent = ({ image, title, story, date }) => (
   <Box>
@@ -42,8 +40,8 @@ export const StoryTimeline = ({ memories }) => {
 export const StoryTimelineMobile = ({ memories }) => {
   return (
     <Stack spacing={4}>
-      {memories?.map((memory) => (
-        <StoryContent {...memory} />
+      {memories?.map((memory, index) => (
+        <StoryContent key={index} {...memory} />
       ))}
     </Stack>
   );

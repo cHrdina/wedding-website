@@ -58,17 +58,13 @@ export const createEntry = async (contentType, fields) => {
 export const updateEntry = async (id, updateObj) => {
   const entry = await getEntryById_mgmt(id);
 
-  console.log("will update entry", entry)
-  console.log("with updates", updateObj)
-
   Object.entries(updateObj).forEach(([fieldName, value]) => {
     entry.fields[fieldName] = {"en-US": value};
   })
 
   const updatedEntry = await entry.update()
 
-  const publishedEntry = await updatedEntry.publish();
-  console.log("PUBLISHED", publishedEntry)
+  await updatedEntry.publish();
 
   return updatedEntry;
 }
@@ -113,12 +109,10 @@ export const getSongSuggestionsForUser = async(userId) => {
 }
 
 export const createSongSuggestion = async (userId, suggestion) => {
-  console.log(suggestion)
   const response = await createEntry("songSuggestion", {suggestedBy: userId, suggestion: suggestion});
   return response;
 }
 export const createHoneymoonSuggestion = async (userId, suggestion) => {
-  console.log(suggestion)
   const response = await createEntry("honeymoonSuggestion", {suggestedBy: userId, suggestion: suggestion});
   return response;
 }

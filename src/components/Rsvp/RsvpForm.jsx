@@ -1,29 +1,22 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Button, Divider, TextField, Typography } from "@mui/material";
+import React, { useContext, useMemo, useRef, useState } from "react";
+import { Button, Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
 import DoneIcon from "@mui/icons-material/Done";
 import { Box } from "@mui/material";
-import { Form, Formik, useFormik } from "formik";
+import { Form, Formik } from "formik";
 
 import { RsvpToggleButton } from "./RsvpToggleButton";
 import { AuthContext } from "../../handlers/AuthHandler";
 import { DietaryRequirementsSection } from "./DietaryRequirements";
 import { Stack } from "@mui/material";
 import { Confetti } from "../Confetti/Confetti";
-import { SuggestionField } from "../SuggestionField/SuggestionField";
 
-const testSuggestions = [
-  "I suggest you shower because u smell",
-  "No really, please take a shower",
-];
+// const sleep = (ms) => {
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// };
 
-const sleep = (ms) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-};
-
-export const RsvpForm = ({ users, onSubmit }) => {
+export const RsvpForm = ({ users }) => {
   const { updateUser } = useContext(AuthContext);
   const [isSubmitted, setSubmitted] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
@@ -58,7 +51,6 @@ export const RsvpForm = ({ users, onSubmit }) => {
 
       <Formik
         initialValues={initialValues}
-        // enableReinitialize
         onSubmit={async (values, { resetForm }) => {
           setSubmitting(true);
           const updates = Object.entries(values)?.reduce(
@@ -74,22 +66,17 @@ export const RsvpForm = ({ users, onSubmit }) => {
             []
           );
 
-          try {
-            await Promise.all(
-              updates?.map(async ({ userId, updates }) => {
-                return updateUser(userId, updates);
-              })
-            );
-            setSubmitting(false);
-            setSubmitted(true);
+          await Promise.all(
+            updates?.map(async ({ userId, updates }) => {
+              return updateUser(userId, updates);
+            })
+          );
+          setSubmitting(false);
+          setSubmitted(true);
 
-            // shoot confetti
-            confettiRef?.current?.rewardMe();
+          // shoot confetti
+          confettiRef?.current?.rewardMe();
 
-            // await sleep(3000);
-          } catch (e) {
-            throw e;
-          }
           resetForm({
             values,
           });
@@ -108,7 +95,7 @@ export const RsvpForm = ({ users, onSubmit }) => {
                 // divider={<Divider />}
               >
                 {users.map((user, key) => (
-                  <Stack spacing={2}>
+                  <Stack key={key} spacing={2}>
                     <Typography variant="body1" fontSize={"1rem"}>
                       <b>
                         {user.fields.firstName} {user.fields.lastName}
@@ -138,7 +125,6 @@ export const RsvpForm = ({ users, onSubmit }) => {
                   <Confetti ref={confettiRef}>
                     {isSubmitted && !dirty ? (
                       <Button
-                        color="success"
                         variant="outlined"
                         startIcon={<DoneIcon />}
                         type="button"

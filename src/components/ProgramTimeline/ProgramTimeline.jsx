@@ -9,24 +9,55 @@ import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import { Typography } from "@mui/material";
 
 export const ProgramTimeline = ({ events }) => {
-  const itemStyle = {
-    fontSize: "1.2rem",
-  };
-
   return (
     <>
       <MuiTimeline sx={{ width: "50vw" }}>
         {events.map(({ title, time }, index) => (
-          <TimelineItem>
-            <TimelineOppositeContent>
-              <Typography style={itemStyle}>{time}</Typography>
+          <TimelineItem key={index} sx={{ minHeight: "2.5rem" }}>
+            <TimelineOppositeContent sx={{ position: "relative" }}>
+              <Typography
+                variant="body1"
+                sx={{
+                  position: "absolute",
+                  top: "-0.2rem",
+                  right: 0,
+                  lineHeight: "1",
+                }}
+              >
+                {time}
+              </Typography>
             </TimelineOppositeContent>
             <TimelineSeparator>
-              <TimelineDot variant="outlined" />
-              <TimelineConnector hidden={index === events.length - 1} />
+              <TimelineDot
+                variant="outlined"
+                sx={{
+                  my: 0,
+                  mx: 4,
+                  p: "4px",
+                  borderWidth: 1,
+                  borderColor: "default.color",
+                }}
+              />
+              <TimelineConnector
+                hidden={index === events.length - 1}
+                sx={{
+                  width: "1px",
+                  backgroundColor: "default.color",
+                }}
+              />
             </TimelineSeparator>
-            <TimelineContent>
-              <Typography style={itemStyle}>{title}</Typography>
+            <TimelineContent sx={{ position: "relative" }}>
+              <Typography
+                variant="body1"
+                sx={{
+                  position: "absolute",
+                  top: "-0.2rem",
+                  left: 0,
+                  lineHeight: "1",
+                }}
+              >
+                {title}
+              </Typography>
             </TimelineContent>
           </TimelineItem>
         ))}
@@ -34,61 +65,3 @@ export const ProgramTimeline = ({ events }) => {
     </>
   );
 };
-
-// import React, { useEffect, useMemo, useRef, useState } from "react";
-// import { useSpring, useSpringRef, useChain, animated } from "react-spring";
-// import { useAnimatedPath, useAnimation } from "../../hooks/useAnimatedPath";
-// import { AnimatedLine } from "./AnimatedLine";
-// import { Circle } from "./Circle";
-// import { Line } from "./Line";
-
-// export const Timeline = ({ events, interval = 50 }) => {
-//   const [toggle, setToggle] = useState(false);
-//   const springRefs = useRef([]);
-
-//   // springRefs.current = events.map(
-//   //   (ref, index) => (springRefs.current[index] = React.createRef())
-//   // );
-
-//   // useChain(springRefs.current);
-
-//   const duration = 1000;
-
-//   const svgWidth = 40;
-//   const circleSize = 10;
-
-//   return (
-//     <div>
-//       <svg
-//         width={svgWidth}
-//         height={interval * events.length - (circleSize * events.length) / 2 + 2}
-//         xmlns="http://www.w3.org/2000/svg"
-//       >
-//         {events.map((_, index) => (
-//           <g>
-//             <Circle
-//               posX={svgWidth / 2}
-//               posY={index * interval + circleSize / 2 + 1}
-//               size={circleSize}
-//             />
-//             {index !== events.length - 1 && (
-//               <Line
-//                 posX={svgWidth / 2}
-//                 startY={index * interval + circleSize}
-//                 endY={index * interval + interval}
-//               />
-//             )}
-//           </g>
-//           // <AnimatedLine
-//           //   key={index}
-//           //   ref={springRef}
-//           //   toggle={toggle}
-//           //   yStart={index * interval}
-//           //   yEnd={index * interval + interval}
-//           //   // delay={duration * index + 1000}
-//           // />
-//         ))}
-//       </svg>
-//     </div>
-//   );
-// };

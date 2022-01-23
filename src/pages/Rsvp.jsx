@@ -1,10 +1,9 @@
-import { Container, Grid, Typography } from "@mui/material";
-import { Stack } from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useContext, useMemo, useState, useEffect } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+
+import { Container } from "@mui/material";
 import { getEntryById } from "../client/client";
-import { AuthContext } from "../handlers/AuthHandler";
 import { RsvpForm } from "../components/Rsvp/RsvpForm";
+import { AuthContext } from "../handlers/AuthHandler";
 
 const Rsvp = () => {
   const { user } = useContext(AuthContext);
@@ -13,7 +12,6 @@ const Rsvp = () => {
   const getHouseholdUsers = async (user) => {
     const household = user.fields.household;
     if (household) {
-      console.log("household users: ", household.fields.users);
       const hUsers = await Promise.all(
         household.fields.users.map(async (hhUser) => {
           const hhUserId = hhUser.sys.id;
@@ -41,22 +39,15 @@ const Rsvp = () => {
   if (!user) return <div>Loading user info</div>;
 
   if (hasHousehold && !householdUsers?.length) {
-    console.log(householdUsers);
     return <div>Loading household info</div>;
   }
 
   return (
-    // <Box
-    //   textAlign="left"
-    //   sx={{ display: "flex", justifyContent: "center", whiteSpace: "nowrap" }}
-    // >
     <Container maxWidth="sm" sx={{ textAlign: "left" }}>
       {(householdUsers || user) && (
         <RsvpForm users={householdUsers || [user]} />
       )}
     </Container>
-
-    // </Box>
   );
 };
 

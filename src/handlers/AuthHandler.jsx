@@ -32,47 +32,38 @@ export const AuthHandler = ({ children }) => {
   }, [storedUserId]);
 
   const setUserInLocal = async (userId) => {
-    console.log("setting user in local: ", userId);
     localStorage.setItem("userId", userId);
     const u = await getEntryById(userId);
     setUser(u);
   };
 
   const loginUserWithId = async (userId, password) => {
-    console.log("loginUserWithId called");
-    console.log(userId);
-    console.log(password);
     const userEntry = await getEntryById(userId);
-    console.log(userEntry);
     if (userEntry?.fields.password === password) {
-      console.log("passwords match, setting user");
       setUserInLocal(userEntry.sys.id);
       history.push("/");
+    } else {
+      throw new Error("Incorrect password");
     }
   };
 
   const loginUser = async (username, password) => {
-    console.log("loginUser called");
     const users = await getUsersByFieldValue({
       fieldName: "username",
       value: username,
     });
     const userEntry = users?.[0];
 
-    console.log(userEntry);
-
     if (userEntry?.fields.password === password) {
-      console.log("password matches records");
       setUserInLocal(userEntry.sys.id);
       history.push("/");
+    } else {
+      throw new Error("Incorrect password");
     }
   };
 
   const updateUser = async (userId, updates) => {
-    const result = await new Promise((resolve) =>
-      updateEntry(userId, updates).then(resolve)
-    );
-    console.log("update result", result);
+    await new Promise((resolve) => updateEntry(userId, updates).then(resolve));
   };
 
   return (

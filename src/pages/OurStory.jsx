@@ -1,4 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import React from "react";
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getMemories } from "../client/client";
 import {

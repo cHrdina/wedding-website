@@ -15,13 +15,14 @@ import { BaseLayout } from "./components/Layout/BaseLayout";
 import { createTheme, ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { PublicLayout } from "./components/Layout/PublicLayout";
+import { Page404 } from "./pages/404";
 
 const themeColors = {
   darkGrey: "#1e1e1e",
   midGrey: "#999999",
-  // peach: "#f4d7cb",
   peach: "#ffefe6",
-  // peachDark: "#f3d7c8",
+  midPeach: "#ffe1d0",
+  darkPeach: "#ffdac6",
 };
 
 const PrivateRoute = ({
@@ -35,10 +36,9 @@ const PrivateRoute = ({
       {...rest}
       render={(props) => {
         if (!localStorage.getItem("userId")) {
-          console.log("no user exists in storage");
           return (
             <Redirect
-              to={{ pathname: `/login`, state: { from: props.location } }}
+              to={{ pathname: `/not-found`, state: { from: props.location } }}
             />
           );
         }
@@ -61,7 +61,6 @@ function App() {
           html: {
             fontFamily: "Spartan",
             fontWeight: 400,
-            // letterSpacing: 1,
             color: themeColors.darkGrey,
           },
         },
@@ -106,27 +105,24 @@ function App() {
             borderRadius: 0,
             borderColor: themeColors.midGrey,
             fontWeight: 400,
-            // borderColor: themeColors.darkGrey,
             textTransform: "none",
             color: themeColors.darkGrey,
 
             "&.Mui-selected": {
               "&:hover": {
                 borderColor: themeColors.midGrey,
-                // borderColor: themeColors.darkGrey,
-                backgroundColor: themeColors.peach,
+                backgroundColor: themeColors.midPeach,
               },
-              backgroundColor: themeColors.peach,
+              backgroundColor: themeColors.darkPeach,
               fontWeight: 500,
             },
             "&.MuiToggleButtonGroup-grouped:not(:first-of-type)": {
               border: "1px solid",
-              // borderColor: themeColors.darkGrey,
               borderColor: themeColors.midGrey,
             },
             "&:hover": {
               borderColor: themeColors.midGrey,
-              backgroundColor: themeColors.peach,
+              backgroundColor: themeColors.midPeach,
             },
           },
           sizeLarge: {
@@ -138,24 +134,18 @@ function App() {
         styleOverrides: {
           root: {
             textTransform: "none",
-            // letterSpacing: 1,
-            // fontWeight: 400,
             color: themeColors.darkGrey,
             whiteSpace: "nowrap",
             minWidth: "max-content",
-            backgroundColor: themeColors.peach,
+            backgroundColor: "none",
             borderRadius: 0,
             "&:hover": {
               borderColor: themeColors.midGrey,
-              backgroundColor: "#f3d7c8",
+              backgroundColor: themeColors.midPeach,
             },
           },
-          // outlined: {
-          //   borderColor: themeColors.midGrey,
-          // },
           outlinedPrimary: {
             borderColor: themeColors.midGrey,
-            // border: "0.5px solid",
           },
           sizeLarge: {
             padding: "0.8rem 2rem",
@@ -173,6 +163,7 @@ function App() {
       },
       text: {
         primary: themeColors.darkGrey,
+        secondary: themeColors.midGrey,
       },
       action: {
         hover: themeColors.peach,
@@ -187,7 +178,6 @@ function App() {
       h1: {
         fontFamily: ["Bacalisties", "serif"].join(","),
         fontSize: "4rem",
-        // letterSpacing: 0.5,
       },
       h4: { fontFamily: ["Spartan", "serif"].join(",") },
       body1: {
@@ -211,11 +201,6 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Switch>
-            <Route exact path={`/login`}>
-              <PublicLayout>
-                <Login />
-              </PublicLayout>
-            </Route>
             <Route path={`/login/:id`}>
               <PublicLayout>
                 <Login />
@@ -224,6 +209,7 @@ function App() {
             {mainMenuRoutes.map(
               ({ route, name, displayPageTitle, component }) => (
                 <PrivateRoute
+                  key={name}
                   exact
                   path={route}
                   name={name}
@@ -232,6 +218,13 @@ function App() {
                 />
               )
             )}
+            <Route
+              component={() => (
+                <PublicLayout>
+                  <Page404 />
+                </PublicLayout>
+              )}
+            />
           </Switch>
         </ThemeProvider>
       </AuthHandler>

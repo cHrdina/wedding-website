@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useSpring, useSprings } from "react-spring";
+import { useState } from "react";
+import { useSpring } from "react-spring";
 
-export const useAnimatedPath = ({ toggle, delay, ref }) => {
+export const useAnimatedPath = ({ toggle, delay }) => {
   const [length, setLength] = useState(null);
 
   const animatedStyle = useSpring({
