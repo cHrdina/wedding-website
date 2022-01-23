@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
@@ -196,7 +196,7 @@ function App() {
   });
 
   return (
-    <Router>
+    <Router basename="/">
       <AuthHandler>
         <ThemeProvider theme={theme}>
           <CssBaseline />

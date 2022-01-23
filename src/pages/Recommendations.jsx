@@ -86,8 +86,8 @@ const Recommendations = () => {
                 </Stack>
                 <Stack spacing={2}>
                   <Typography textAlign="left" variant="body1">
-                    Where should we go? Name your favorite place that you&aposve
-                    explored.
+                    Where should we go? Name your favorite place that
+                    you&apos;ve explored.
                   </Typography>
                   <SuggestionField
                     name="honeymoonSuggestions"

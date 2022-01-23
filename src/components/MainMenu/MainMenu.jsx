@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import {
   AppBar,
@@ -6,7 +7,7 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
-  Link,
+  // Link,
   Box,
   Grid,
   Container,
@@ -45,7 +46,10 @@ export const Header = () => {
                   .filter((route) => !route.isPublic)
                   .map(({ name, route }, key) => (
                     <Grid item key={key}>
-                      <Link
+                      <Link key={key} to={route}>
+                        {name}
+                      </Link>
+                      {/* <Link
                         sx={{
                           color: "text.primary",
                           textDecoration: "none",
@@ -55,7 +59,7 @@ export const Header = () => {
                         href={route}
                       >
                         {name}
-                      </Link>
+                      </Link> */}
                     </Grid>
                   ))}
               </Grid>

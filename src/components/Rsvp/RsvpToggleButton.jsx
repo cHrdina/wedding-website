@@ -12,8 +12,8 @@ export const RsvpToggleButton = ({ name, value, onChange }) => {
       value={value}
       size="large"
     >
-      <ToggleButton value="attending">Yes, I&aposll be there</ToggleButton>
-      <ToggleButton value="not_attending">No, I can&apost attend</ToggleButton>
+      <ToggleButton value="attending">Yes, I&apos;ll be there</ToggleButton>
+      <ToggleButton value="not_attending">No, I can&apos;t attend</ToggleButton>
     </ToggleButtonGroup>
   );
 };

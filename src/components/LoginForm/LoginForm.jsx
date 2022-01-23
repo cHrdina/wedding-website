@@ -73,7 +73,7 @@ export const LoginForm = ({ onSubmit }) => {
             px: 13,
           }}
         >
-          let&aposs go
+          let&apos;s go
         </LoadingButton>
       </Stack>
     </form>
