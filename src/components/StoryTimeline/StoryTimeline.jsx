@@ -11,10 +11,12 @@ import React from "react";
 const StoryContent = ({ image, title, story, date }) => (
   <Box>
     <img src={image} width="100%" style={{ marginBottom: "1rem" }} />
-    <Typography variant="h4">{title}</Typography>
-    <Typography variant="subtitle1">
-      {format(new Date(date), "MMMM yyyy")}
-    </Typography>
+    <Stack spacing={1}>
+      <Typography variant="h4">{title}</Typography>
+      <Typography variant="subtitle1">
+        {format(new Date(date), "MMMM yyyy")}
+      </Typography>
+    </Stack>
     <Typography>{story}</Typography>
   </Box>
 );
