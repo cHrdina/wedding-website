@@ -54,6 +54,7 @@ const PrivateRoute = ({
 };
 
 function App() {
+  const defaultTheme = createTheme();
   const theme = createTheme({
     overrides: {
       CssBaseline: {
@@ -178,6 +179,9 @@ function App() {
       h1: {
         fontFamily: ["Bacalisties", "serif"].join(","),
         fontSize: "4rem",
+        [defaultTheme.breakpoints.down("md")]: {
+          fontSize: "3rem",
+        },
       },
       h4: { fontFamily: ["Spartan", "serif"].join(",") },
       body1: {
