@@ -1,18 +1,23 @@
-import React from "react";
+import Reactm, { useCallback } from "react";
 import { useToggle } from "../../hooks/useToggle";
+import { Link, useLocation } from "react-router-dom";
 
 import { mainMenuRoutes } from "../../routes";
 import MenuIcon from "@mui/icons-material/MenuOutlined";
-import { Drawer, IconButton, Box, Link } from "@mui/material";
+import { Drawer, IconButton, Box, Link as MuiLink } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { ListItemText, MenuItem, MenuList } from "@mui/material";
 
 export const MobileMenu = () => {
   const [isOpen, toggleIsOpen] = useToggle();
+  const location = useLocation();
 
-  const isActiveRoute = (route) => {
-    return window.location.pathname === route;
-  };
+  const isActiveRoute = useCallback(
+    (route) => {
+      return location?.pathname === route;
+    },
+    [location]
+  );
 
   return (
     <>
@@ -27,9 +32,10 @@ export const MobileMenu = () => {
             {mainMenuRoutes
               .filter((route) => !route.isPublic)
               .map(({ name, route }, index) => (
-                <Link
+                <MuiLink
                   key={index}
-                  href={route}
+                  component={Link}
+                  to={route}
                   variant="body1"
                   style={{ textDecoration: "none" }}
                 >
@@ -39,7 +45,7 @@ export const MobileMenu = () => {
                   >
                     <ListItemText primary={name} />
                   </MenuItem>
-                </Link>
+                </MuiLink>
               ))}
           </MenuList>
         </Box>
