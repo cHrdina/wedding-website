@@ -24,8 +24,11 @@ export const Header = () => {
   return (
     <AppBar
       elevation={0}
-      position="static"
-      sx={{ bgcolor: "background.default", color: "text.primary" }}
+      position="fixed"
+      sx={{
+        bgcolor: "background.default",
+        color: "text.primary",
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
