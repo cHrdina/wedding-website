@@ -57,6 +57,7 @@ export const LoginForm = ({ onSubmit }) => {
             name="password"
             variant="standard"
             autoFocus
+            autoCapitalize="none"
             error={!!errors?.password}
             helperText={errors?.password}
           />
