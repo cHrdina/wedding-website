@@ -38,7 +38,7 @@ export const DietaryRequirementsSection = ({
   const handleParentChange = () => {
     if (isExpanded) {
       setFieldValue(`${userId}.dietaryRequirements`, []);
-      setFieldValue(`${userId}.allergies`, null);
+      setFieldValue(`${userId}.allergies`, "");
     }
     setIsExpanded((d) => !d);
   };
@@ -79,8 +79,7 @@ export const DietaryRequirementsSection = ({
           </FormGroup>
           <TextField
             name={`${userId}.allergies`}
-            label="Allergies"
-            placeholder="Please list any allergies here."
+            label="Allergies/other notes"
             multiline
             value={values?.allergies}
             onChange={onChange}
