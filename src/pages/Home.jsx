@@ -1,12 +1,27 @@
-import { Box } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import React from "react";
+import { useHistory } from "react-router-dom";
+
 import { InviteCard } from "../components/InviteCard/InviteCard";
 
 const Home = () => {
+  const { push } = useHistory();
+
   return (
-    <Box sx={{ margin: "auto" }}>
+    <Stack spacing={8} sx={{ margin: "auto" }}>
       <InviteCard />
-    </Box>
+      <div>
+        <Button
+          onClick={async () => {
+            await push("/rsvp");
+          }}
+          size="large"
+          variant="outlined"
+        >
+          RSVP
+        </Button>
+      </div>
+    </Stack>
   );
 };
 
