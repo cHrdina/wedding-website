@@ -87,6 +87,13 @@ function App() {
           },
         },
       },
+      MuiLink: {
+        styleOverrides: {
+          root: {
+            textDecoration: "none",
+          },
+        },
+      },
       MuiCheckbox: {
         styleOverrides: {
           root: {

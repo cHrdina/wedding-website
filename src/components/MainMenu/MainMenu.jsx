@@ -32,14 +32,16 @@ export const Header = () => {
     >
       <Container maxWidth="xl">
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography
-            variant="logo"
-            noWrap
-            component="div"
-            sx={{ pr: 2, display: "flex" }}
-          >
-            m{" + "}c
-          </Typography>
+          <MuiLink component={Link} to="/">
+            <Typography
+              variant="logo"
+              noWrap
+              component={"div"}
+              sx={{ pr: 2, display: "flex" }}
+            >
+              {`m + c`}
+            </Typography>
+          </MuiLink>
           {isMobile ? (
             <MobileMenu />
           ) : (
