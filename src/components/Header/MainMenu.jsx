@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { mainMenuRoutes } from "../../routes";
-import { MobileMenu } from "../MobileMenu/MobileMenu";
+import { MobileMenu } from "./MobileMenu";
 
 export const Header = () => {
   const theme = useTheme();
@@ -45,17 +45,20 @@ export const Header = () => {
           {isMobile ? (
             <MobileMenu />
           ) : (
-            <Box>
+            <Box sx={{ height: "100%" }}>
               <Grid container spacing={4}>
                 {mainMenuRoutes
                   .filter((route) => !route.isPublic)
                   .map(({ name, route }, key) => (
-                    <Grid item key={key}>
+                    <Grid item key={key} sx={{ height: "100%" }}>
                       <MuiLink
                         sx={{
                           color: "text.primary",
                           textDecoration: "none",
                           fontWeight: pathname === route ? 600 : 400,
+                          display: "flex",
+                          flex: 1,
+                          flexDirection: "column",
                         }}
                         variant="body1"
                         component={Link}
