@@ -2,7 +2,7 @@
   "name": "wedding-website",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://chrdina.github.io/wedding-website",
+  "homepage": "https://chrdina.github.io",
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^15.11.0",
     "@contentful/rich-text-react-renderer": "^15.11.0",
@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "contentful-cli": "^1.10.0",
     "eslint-plugin-react": "^7.28.0",
     "gh-pages": "^3.2.3"
   }
