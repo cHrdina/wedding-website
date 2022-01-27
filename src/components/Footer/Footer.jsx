@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Box } from "@mui/system";
-import { Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export const Footer = () => {
   return (
