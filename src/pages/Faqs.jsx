@@ -11,6 +11,8 @@ import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 import LocalDiningOutlinedIcon from "@mui/icons-material/LocalDiningOutlined";
 import NoPhotographyOutlinedIcon from "@mui/icons-material/NoPhotographyOutlined";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
+import PoolOutlinedIcon from "@mui/icons-material/PoolOutlined";
+
 import { Icon, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
@@ -28,6 +30,7 @@ const iconsRecord = {
   AccessTimeOutlined: AccessTimeOutlinedIcon,
   DirectionsCarOutlined: DirectionsCarOutlinedIcon,
   LiveTvOutlined: LiveTvOutlinedIcon,
+  PoolOutlined: PoolOutlinedIcon,
 };
 
 export const Faq = ({ icon, question, answer }) => {
