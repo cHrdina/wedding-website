@@ -8,7 +8,7 @@ import Faqs from "../pages/Faqs";
 
 export const mainMenuRoutes = [
   {
-    name: "home",
+    name: "invite",
     route: "/",
     component: Home,
     displayPageTitle: false
